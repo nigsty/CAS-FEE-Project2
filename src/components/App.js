@@ -20,8 +20,8 @@ import Appointmentsold from './AppointmentsOld';
 import AddAppointments from './AddAppointments';
 import ListAppointments from './ListAppointments';
 import SearchAppointments from './SearchAppointments';
-import Header2 from '../components/ui/Header2';
-import Footer2 from '../components/ui/Footer2';
+import Header from './ui/Header';
+import Footer from './ui/Footer';
 
 import '../css/App.css';
 import { without, findIndex } from 'lodash';
@@ -170,7 +170,7 @@ class App extends Component {
 			<div className="layout-container">
 				<ThemeProvider theme={theme}>
 					<Router>
-						<Header2 />
+						<Header user={this.state.user}/>
 						<div className="layout-content">
 							<Switch>								
 								<Route exact path="/" component={Home} user={this.state.user} />
@@ -187,7 +187,7 @@ class App extends Component {
 							</Switch>
 						</div>
 					</Router>
-					<Footer2 />
+					<Footer />
 				</ThemeProvider>
 			</div>
 		);

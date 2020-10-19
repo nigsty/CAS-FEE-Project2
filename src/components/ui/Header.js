@@ -114,8 +114,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function Header2(props) {
-
+export default function Header(props) {
 	const classes = useStyles();
 	const theme = useTheme();
 	const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -165,7 +164,8 @@ export default function Header2(props) {
 			</Tabs>
 			<Button variant="contained" color="secondary" className={classes.button}>
 				Login
-			</Button>
+			</Button> 
+			welcome 
 		</React.Fragment>
 	);
 	const drawer = (
@@ -217,7 +217,7 @@ export default function Header2(props) {
 						<ListItemText className={classes.drawerItem} disableTypography>
 							Login
 						</ListItemText>
-					</ListItem>
+					</ListItem> 
 				</List>
 			</SwipeableDrawer>
 			<IconButton
@@ -242,7 +242,7 @@ export default function Header2(props) {
 							className={classes.logoContainer}
 						>
 							<img alt="Habescha logo" className={classes.logo} src={logo} />
-						</Button>
+						</Button>					
 						{matches ? drawer : tabs}
 					</Toolbar>
 				</AppBar>

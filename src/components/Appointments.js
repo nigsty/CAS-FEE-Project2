@@ -55,7 +55,9 @@ class Appointments extends Component {
 		const itemName = e.target.name;
 		const itemValue = e.target.value;
 
-		this.setState({ [itemName]: itemValue });
+		this.setState({ 
+			[itemName]: itemValue 
+		});
 	}
 
 	handleSubmit(e) {

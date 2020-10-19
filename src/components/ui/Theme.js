@@ -1,8 +1,8 @@
 import { createMuiTheme } from '@material-ui/core';
 
 const habeschaGreen = '#009444';
-const habeschaRed = '#FF0000';
-const habeschaBraun = '#723e1c';
+const habeschaRed = '#F15A24';
+const habeschaBraun = '#F7931E';
 
 const theme =  createMuiTheme({
 	palette: {
@@ -33,10 +33,10 @@ const theme =  createMuiTheme({
 		},
 		body1: {
 			fontSize: '1.3rem',
-			color: '#494949'
+			color: '#343434'
 		},
 		body2: {
-			color: '#494949',
+			color: '#272727',
 		}
 	},
 });
