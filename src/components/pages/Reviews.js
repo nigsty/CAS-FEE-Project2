@@ -6,14 +6,6 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Helmet } from 'react-helmet';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ReviewsList from '../ReviewsList';
@@ -166,7 +158,7 @@ function Reviews() {
 							required
 							fullWidth
 							id="review"
-							label="Ihre Rezesion..."
+							label="Ihre Bewertung..."
 							name="review"
 							autoComplete="thema"
 							autoFocus
@@ -206,30 +198,11 @@ function Reviews() {
 							) : null}
 						</Grid>
 						<Grid item xs={12} className={classes.mobileMargin}>
-							<TableContainer component={Paper}>
-								<Table className={classes.table} size="small" aria-label="a dense table">
-									{reviews && reviews.length ? (
-										<TableHead>
-											<TableRow>
-												<TableCell style={{width:'70%'}} classes={{ root: classes.tableHead }} align="left">
-													Bewertung
-												</TableCell>
-												<TableCell classes={{ root: classes.tableHead }} align="left">
-													Name, Institution
-												</TableCell>
-												<TableCell classes={{ root: classes.tableHead }} align="left">
-													Datum 
-												</TableCell>
-											</TableRow>
-										</TableHead>
-									) : null}
-									<TableBody>
-										{reviews ? (
-											<ReviewsList reviews={reviews} />
-										) : null}
-									</TableBody>
-								</Table>
-							</TableContainer>
+						<Grid container spacing={2}>
+							{reviews ? (
+												<ReviewsList reviews={reviews} />
+											) : null}
+							</Grid>
 						</Grid>
 					</Grid>
 				</Grid>
