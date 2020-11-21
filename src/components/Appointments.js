@@ -131,7 +131,6 @@ class Appointments extends Component {
 			institution: item.institution,
 			aptDateTime: item.aptDateTime.toDate(),
 		});
-		this.props.editAppointment(e, item);
 	};
 
 	render() {

@@ -62,6 +62,17 @@ const useStyles = makeStyles((theme) => ({
 	errorIcon: {
 		color: 'red',
 	},
+	reviewsContainer: {
+		display: 'grid',
+		gridTemplateColumns: 'repeat(3, 1fr)',
+		alignItems: 'start',
+		[theme.breakpoints.down('md')]: {
+			
+		},
+		[theme.breakpoints.down('xs')]: {
+			gridTemplateColumns: 'repeat(2, 1fr)',
+		},
+	},
 }));
 
 function Reviews() {
@@ -80,7 +91,7 @@ function Reviews() {
 		} catch (error) {
 			console.log('could not get reviews.', error);
 		}
-	}
+	};
 
 	useEffect(() => {
 		readReviews();
@@ -190,18 +201,16 @@ function Reviews() {
 				<Grid item lg={2} />
 				<Grid item xs={12} md={12} lg={8} className={classes.tablePadding}>
 					<Grid container>
-						<Grid item xs={12} className={classes.mobileMargin}>
+						<Grid item xs={12} className={classes.mobileMargin} direction="column" >
 							{reviews && reviews.length ? (
 								<Typography variant="h3" color="primary" gutterBottom>
-								Kundenbewertungen
+									Kundenbewertungen
 								</Typography>
 							) : null}
 						</Grid>
 						<Grid item xs={12} className={classes.mobileMargin}>
-						<Grid container spacing={2}>
-							{reviews ? (
-												<ReviewsList reviews={reviews} />
-											) : null}
+							<Grid container spacing={2} direction="row">
+								{reviews ? <ReviewsList reviews={reviews} /> : null}
 							</Grid>
 						</Grid>
 					</Grid>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import {
@@ -37,36 +37,35 @@ const App = (props) => {
 	const [admin, setAdmin] = useState(false);
 	let history = useHistory();
 
-	const readAppointments = useCallback( async () => {
-
-		if (!auth.currentUser) {
-			return;
-		}
-
-		const appointments = await getAppointments({ all: admin });
-		setAppointments(appointments)
-	}, [admin]);
-
 	useEffect(() => {
-		return onAuthStateChanged(async (FBUser) => {
+		onAuthStateChanged(async (FBUser) => {
+			console.log('onAuthStateChanged', FBUser);
 			if (FBUser) {
 					setUser(FBUser);
 					setDisplayName(FBUser.displayName);
 					setUserID(FBUser.uid);
 
-				await readAppointments();
+				const ap = await readAppointments();
 				
-				await getReviews();
-				
+				const reviews = await getReviews();
+				 //setReviews
 			} else {
 				setUser(null);
 			}
 		});
-	}, [readAppointments]);
+	}, []);
 
 	const loadAll = () => {
 		setAdmin(true) 
 			readAppointments();
+	};
+
+	const readAppointments = async () => {
+		if (!auth.currentUser) {
+			return;
+		}
+		const appointments = await getAppointments({ all: admin });
+		setAppointments(appointments)
 	};
 
 	const handleLogOut = async (e) => {

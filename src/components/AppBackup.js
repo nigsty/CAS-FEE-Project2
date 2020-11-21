@@ -50,14 +50,16 @@ const App = (props) => {
 	useEffect(() => {
 		return onAuthStateChanged(async (FBUser) => {
 			if (FBUser) {
+
 					setUser(FBUser);
 					setDisplayName(FBUser.displayName);
 					setUserID(FBUser.uid);
 
+
 				await readAppointments();
 				
 				await getReviews();
-				
+				 //setReviews
 			} else {
 				setUser(null);
 			}
@@ -68,6 +70,8 @@ const App = (props) => {
 		setAdmin(true) 
 			readAppointments();
 	};
+
+	
 
 	const handleLogOut = async (e) => {
 		e.preventDefault();
