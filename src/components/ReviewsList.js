@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles, Typography, Grid } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,8 +9,6 @@ import 'moment/locale/de';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		minWidth: 240,
-		maxWidth: 400,
 		// border: '1px solid green',
 		transition: 'transform .8s,box-shadow .8s',
 		'&:hover': {
@@ -37,8 +35,8 @@ const ReviewsList = ({ reviews }) => {
 	return reviews.map((item) => {
 		const date = new Date(item.reviewedDate.seconds * 1000);
 		return (
-			<>
-				<Grid item xs={12} sm={6} md={4} direction="row">
+			<Fragment key={item.id}>
+				<Grid item xs={12} sm={6} md={4}>
 					<Card className={classes.root}>
 						<CardContent>
 							<Typography
@@ -66,7 +64,7 @@ const ReviewsList = ({ reviews }) => {
 						</CardContent>
 					</Card>
 				</Grid>
-			</>
+			</Fragment>
 		);
 	});
 };

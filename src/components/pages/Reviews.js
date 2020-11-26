@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
 
+import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Helmet } from 'react-helmet';
-
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
+import { Helmet } from 'react-helmet';
+
 import ReviewsList from '../ReviewsList';
 import FormError from '../FormError';
 import { auth, getReviews, addReview } from '../../services/Firebase';
@@ -17,25 +18,6 @@ import messages from '../messages';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		padding: 20,
-	},
-	toolbarMargin: {
-		...theme.mixins.toolbar,
-		marginBottom: '1em',
-		[theme.breakpoints.down('md')]: {
-			marginBottom: '2em',
-		},
-		[theme.breakpoints.down('xs')]: {
-			marginBottom: '1.25em',
-		},
-	},
-	mainContainer: {
-		marginTop: '2em',
-		[theme.breakpoints.down('md')]: {
-			marginTop: '2em',
-		},
-		[theme.breakpoints.down('xs')]: {
-			marginTop: '1em',
-		},
 	},
 	paper: {
 		marginTop: theme.spacing(8),
@@ -62,24 +44,13 @@ const useStyles = makeStyles((theme) => ({
 	errorIcon: {
 		color: 'red',
 	},
-	reviewsContainer: {
-		display: 'grid',
-		gridTemplateColumns: 'repeat(3, 1fr)',
-		alignItems: 'start',
-		[theme.breakpoints.down('md')]: {
-			
-		},
-		[theme.breakpoints.down('xs')]: {
-			gridTemplateColumns: 'repeat(2, 1fr)',
-		},
-	},
 }));
 
 function Reviews() {
-	const [id, setId] = useState('');
+	//const [id, setId] = useState('');
 	const [review, setReview] = useState('');
 	const [nameAndInstitution, setNameAndInstitution] = useState('');
-	const [reviewedDate, setReviewedDate] = useState(new Date());
+	//const [reviewedDate, setReviewedDate] = useState(new Date());
 	const [errorMessage, setErrorMessage] = useState(null);
 
 	const [reviews, setReviews] = useState(null); // [] array
@@ -102,16 +73,18 @@ function Reviews() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		let tempReview = {
-			id: id,
+			//id: id,
 			review: review,
-			reviewedDate: reviewedDate,
+			reviewedDate: new Date(), // reviewedDate,
 			nameAndInstitution: nameAndInstitution,
-			email: auth.currentUser.email,
-			uid: auth.currentUser.uid,
+			email: auth.currentUser ? auth.currentUser.email : '',
+			uid: auth.currentUser ? auth.currentUser.uid : '',
 		};
 		if (!tempReview.review || !tempReview.nameAndInstitution) {
 			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus');
 			return;
+		} else {
+			setErrorMessage(null);
 		}
 
 		let newDocRef;
@@ -127,7 +100,7 @@ function Reviews() {
 		try {
 			await readReviews();
 		} catch (error) {
-			console.error('Error adding document: ', error);
+			console.error('Error reading document: ', error);
 		}
 	};
 
@@ -201,15 +174,15 @@ function Reviews() {
 				<Grid item lg={2} />
 				<Grid item xs={12} md={12} lg={8} className={classes.tablePadding}>
 					<Grid container>
-						<Grid item xs={12} className={classes.mobileMargin} direction="column" >
+						<Grid item xs={12}>
 							{reviews && reviews.length ? (
 								<Typography variant="h3" color="primary" gutterBottom>
-									Kundenbewertungen
+									Aktuelle Bewertungen
 								</Typography>
 							) : null}
 						</Grid>
-						<Grid item xs={12} className={classes.mobileMargin}>
-							<Grid container spacing={2} direction="row">
+						<Grid item xs={12}>
+							<Grid container spacing={2}>
 								{reviews ? <ReviewsList reviews={reviews} /> : null}
 							</Grid>
 						</Grid>

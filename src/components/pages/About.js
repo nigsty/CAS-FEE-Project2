@@ -1,50 +1,23 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { MainContainer, Title } from '../ui/ui-partials';
+import { Typography, Avatar, Grid, makeStyles } from '@material-ui/core';
+import { Helmet } from 'react-helmet';
+
 import me from '../../assets/me.png';
-import Grid from '@material-ui/core/Grid';
-import { Typography, useMediaQuery } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
-import {Helmet} from "react-helmet";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		padding: 20,
 	},
-	toolbarMargin: {
-		...theme.mixins.toolbar,
-		marginBottom: '1em',
-		[theme.breakpoints.down('md')]: {
-			marginBottom: '2em',
-		},
-		[theme.breakpoints.down('xs')]: {
-			marginBottom: '1.25em',
-		},
-	},
-	mainContainer: {
-		marginTop: '2em',
-		[theme.breakpoints.down('md')]: {
-			marginTop: '2em',
-		},
-		[theme.breakpoints.down('xs')]: {
-			marginTop: '1em',
-		},
-	},
-	imgStyle: {
-		margin: 'auto',
-		display: 'block',
-		maxWidth: '100%',
-		maxHeight: '100%',
-	},
 	large: {
-    width: '80%',
+		width: '80%',
 		height: 'auto',
 		[theme.breakpoints.down('md')]: {
 			margin: 'auto',
 			display: 'block',
 			width: '80%',
 		},
-	
-  },
+	},
 }));
 
 const aboutMeHeading = 'I am habescha';
@@ -53,12 +26,9 @@ const aboutMeBodyText =
 
 function About() {
 	const classes = useStyles();
-	const theme = useTheme();
-	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
-
 	return (
 		<div className={classes.root}>
-		<Helmet>
+			<Helmet>
 				<title>Habescha: Nigsty Abreha </title>
 				<link rel="canonical" href="http://habescha.ch/home" />
 				<meta
@@ -70,35 +40,29 @@ function About() {
 					content="Habescha, Interkulturelles Dolmetschen, Telefondolmetschen, Tigrigna, Tigrinya, Amharisch, Deutsch"
 				/>
 			</Helmet>
-			<Grid container className={classes.mainContainer} >
-				<Grid item lg={2}/>
+			<MainContainer>
+				<Grid item lg={2} />
 				<Grid item xs={12} md={12} lg={8}>
 					<Grid container>
 						<Grid item xs={12}>
-							<Typography 
-							style={{fontSize: matchesXS ? '2rem' : null}}
-							variant="h1" color="primary" gutterBottom>
-									{aboutMeHeading}
-							</Typography>
+							<Title>{aboutMeHeading}</Title>
 						</Grid>
 						<Grid item xs={12}>
 							<Grid container spacing={4}>
 								<Grid item xs={12} md={6}>
-								<Typography variant="body1" gutterBottom>
-									{aboutMeBodyText}
-								</Typography>
+									<Typography variant="body1" gutterBottom>
+										{aboutMeBodyText}
+									</Typography>
 								</Grid>
 								<Grid item xs={12} md={6}>
-								<Avatar alt="Nigsty Abreha" src={me} className={classes.large} />
+									<Avatar alt="Nigsty Abreha" src={me} className={classes.large} />
 								</Grid>
-								{/* <Grid item item xs={12} md={6}><img src={me} alt="Nigsty" className={classes.imgStyle} /></Grid> */}
 							</Grid>
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item lg={2}/>
-			</Grid>
-			<div className={classes.toolbarMargin} />
+				<Grid item lg={2} />
+			</MainContainer>
 		</div>
 	);
 }

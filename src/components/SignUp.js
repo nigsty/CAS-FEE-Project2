@@ -1,20 +1,24 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/styles';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+import React, { useState } from 'react';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import {
+	makeStyles,
+	Typography,
+	Container,
+	Grid,
+	TextField,
+	Link,
+	CssBaseline,
+	Button,
+	Avatar,
+} from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
-import {signUpUser} from '../services/Firebase';
+import { useHistory } from 'react-router';
+import { signUpUser } from '../services/Firebase';
+
 import FormError from './FormError';
 import messages from './messages';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
 	paper: {
 		marginTop: theme.spacing(8),
 		display: 'flex',
@@ -32,135 +36,129 @@ const styles = (theme) => ({
 	submit: {
 		margin: theme.spacing(3, 0, 2),
 	},
-});
+}));
 
-class SignUp extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			displayName: '',
-			email: '',
-			password: '',
-			errorMessage: null,
-		};
+const SignUp = ({ registerUser, user }) => {
+	const [displayName, setDisplayName] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [errorMessage, setErrorMessage] = useState(null);
 
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
+	const classes = useStyles();
+	let history = useHistory();
 
-	handleChange(e) {
+	const handleChange = (e) => {
 		const itemName = e.target.name;
 		const itemValue = e.target.value;
 
-		this.setState({ [itemName]: itemValue });
-	}
-
-	handleSubmit =  async(e) =>{
-		let registrationInfo = {
-			displayName: this.state.displayName,
-			email: this.state.email,
-			password: this.state.password,
-		};
-		e.preventDefault();
-		try {
-			await signUpUser(registrationInfo);
-			if (typeof this.props.registerUser === 'function') {
-				this.props.registerUser(registrationInfo.firstName);
-			}
-			this.props.history.push('/');
-		} catch (error){
-			if (error.message !== null) {
-				console.log('Firebase ERROR', error.code, error.message);
-				let errorMessage = messages[error.code] || error.message;
-				this.setState({ errorMessage });
-			} else {
-				this.setState({ errorMessage: null });
-			}
+		if (itemName === 'email') {
+			setEmail(itemValue);
+		} else if (itemName === 'password') {
+			setPassword(itemValue);
+		} else if (itemName === 'displayName') {
+			setDisplayName(itemValue);
 		}
 	};
 
-	render() {
-		const { classes, user } = this.props;
-		if (user) {
-			return <Redirect to="/" />;
-		}
-		return (
-			<Container component="main" maxWidth="xs">
-				<CssBaseline />
-				<div className={classes.paper}>
-					<Avatar className={classes.avatar}>
-						<LockOutlinedIcon />
-					</Avatar>
-					<Typography component="h1" variant="h5">
-						Registrieren
-					</Typography>
-					<form className={classes.form} noValidate onSubmit={this.handleSubmit}>
-						{this.state.errorMessage !== null ? <FormError theMessage={this.state.errorMessage} /> : null}
-						<Grid container spacing={2}>
-							<Grid item xs={12}>
-								<TextField
-									autoComplete="fname"
-									name="displayName"
-									variant="outlined"
-									required
-									fullWidth
-									id="displayName"
-									label="Full Name"
-									autoFocus
-									value={this.state.displayName}
-									onChange={this.handleChange}
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<TextField
-									variant="outlined"
-									required
-									fullWidth
-									id="email"
-									label="Email Adresse"
-									name="email"
-									autoComplete="email"
-									value={this.state.email}
-									onChange={this.handleChange}
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<TextField
-									variant="outlined"
-									required
-									fullWidth
-									name="password"
-									label="Password"
-									type="password"
-									id="password"
-									autoComplete="current-password"
-									value={this.state.password}
-									onChange={this.handleChange}
-								/>
-							</Grid>
-							{/*  <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid> */}
-						</Grid>
-						<Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-							Registrieren
-						</Button>
-						<Grid container justify="flex-end">
-							<Grid item>
-								{'Haben Sie berits ein Login? '}
-								<Link href="./signin" variant="body2">
-									Hier einloggen.
-								</Link>
-							</Grid>
-						</Grid>
-					</form>
-				</div>
-			</Container>
-		);
-	}
-}
+	const handleSubmit = async (e) => {
+		let registrationInfo = {
+			displayName: displayName,
+			email: email,
+			password: password,
+		};
+		e.preventDefault();
 
-export default withStyles(styles)(SignUp);
+		if (!registrationInfo.displayName) {
+			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus');
+			return;
+		}
+
+		try {
+			await signUpUser(registrationInfo);
+			if (typeof registerUser === 'function') {
+				registerUser(registrationInfo.firstName);
+			}
+			setErrorMessage(null);
+			history.push('/');
+		} catch (error) {
+			let errorMessage = messages[error.code] || error.message;
+			setErrorMessage(errorMessage);
+		}
+	};
+
+	if (user) {
+		return <Redirect to="/" />;
+	}
+	return (
+		<Container component="main" maxWidth="xs">
+			<CssBaseline />
+			<div className={classes.paper}>
+				<Avatar className={classes.avatar}>
+					<LockOutlinedIcon />
+				</Avatar>
+				<Typography component="h1" variant="h5">
+					Registrieren
+				</Typography>
+				<form className={classes.form} noValidate onSubmit={handleSubmit}>
+					{errorMessage !== null ? <FormError theMessage={errorMessage} /> : null}
+					<Grid container spacing={2}>
+						<Grid item xs={12}>
+							<TextField
+								autoComplete="fname"
+								name="displayName"
+								variant="outlined"
+								required
+								fullWidth
+								id="displayName"
+								label="Full Name"
+								autoFocus
+								value={displayName}
+								onChange={handleChange}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								id="email"
+								label="Email Adresse"
+								name="email"
+								autoComplete="email"
+								value={email}
+								onChange={handleChange}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								name="password"
+								label="Password"
+								type="password"
+								id="password"
+								autoComplete="current-password"
+								value={password}
+								onChange={handleChange}
+							/>
+						</Grid>
+					</Grid>
+					<Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+						Registrieren
+					</Button>
+					<Grid container justify="flex-end">
+						<Grid item>
+							{'Haben Sie berits ein Login? '}
+							<Link href="./signin" variant="body2">
+								Hier einloggen.
+							</Link>
+						</Grid>
+					</Grid>
+				</form>
+			</div>
+		</Container>
+	);
+};
+
+export default SignUp;

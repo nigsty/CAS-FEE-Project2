@@ -29,9 +29,7 @@ function ElevationScroll(props) {
 	return React.cloneElement(children, {
 		elevation: trigger ? 4 : 0,
 	});
-};
-
-
+}
 
 const useStyles = makeStyles((theme) => ({
 	toolbarMargin: {
@@ -83,8 +81,7 @@ const useStyles = makeStyles((theme) => ({
 		color: 'white',
 		'&:focus': {
 			outline: 'none !important',
-		}
-
+		},
 	},
 	drawerIcon: {
 		height: '40px',
@@ -142,23 +139,18 @@ export default function Header(props) {
 	};
 
 	const activeIndex = () => {
-    const found = routes.indexOf(
-      routes.filter(
-        ({ name, link }) =>
-          link === window.location.pathname
-      )[0]
-    )
+		const found = routes.indexOf(routes.filter(({ name, link }) => link === window.location.pathname)[0]);
 
-    return found === -1 ? false : found
-  }
+		return found === -1 ? false : found;
+	};
 
-const routes = [
-	{ name: 'Home', link: '/', activeIndex: 0 },
-	{ name: 'Telephonedolmetschen', link: '/interpreting', activeIndex: 1 },
-	{ name: 'Kundenbewertungen', link: '/reviews', activeIndex: 2 },
-	{ name: 'FAQ', link: '/faq', activeIndex: 3 },		
-	{ name: 'Über mich', link: '/about', activeIndex: 4 },
-];
+	const routes = [
+		{ name: 'Home', link: '/', activeIndex: 0 },
+		{ name: 'Telefondolmetschen', link: '/interpreting', activeIndex: 1 },
+		{ name: 'Kundenbewertungen', link: '/reviews', activeIndex: 2 },
+		{ name: 'FAQ', link: '/faq', activeIndex: 3 },
+		{ name: 'Über mich', link: '/about', activeIndex: 4 },
+	];
 
 	const tabs = (
 		<React.Fragment>

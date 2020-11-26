@@ -1,33 +1,15 @@
 import React from 'react';
-import { makeStyles, useTheme, Typography} from '@material-ui/core';
+import { makeStyles, Typography} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {Helmet} from "react-helmet";
+
+import { MainContainer, Title } from '../ui/ui-partials';
 
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		padding: 20,
 	},
-	toolbarMargin: {
-		...theme.mixins.toolbar,
-		marginBottom: '1em',
-		[theme.breakpoints.down('md')]: {
-			marginBottom: '2em',
-		},
-		[theme.breakpoints.down('xs')]: {
-			marginBottom: '1.25em',
-		},
-	},
-	mainContainer: {
-		marginTop: '2em',
-		[theme.breakpoints.down('md')]: {
-			marginTop: '2em',
-		},
-		[theme.breakpoints.down('xs')]: {
-			marginTop: '1em',
-		},
-	}
 }));
 
 const interpretHeading = 'Telefondolmetschen';
@@ -36,8 +18,6 @@ const interpretBodyText =
 
 function TelephoneInterpreting() {
 	const classes = useStyles();
-	const theme = useTheme();
-	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 	return (
 		<div className={classes.root}>
 			<Helmet>
@@ -52,17 +32,15 @@ function TelephoneInterpreting() {
 					content="Habescha, Interkulturelles Dolmetschen, Telefondolmetschen, Tigrigna, Tigrinya, Amharisch, Deutsch"
 				/>
 		</Helmet>
-		<Grid container className={classes.mainContainer} >
+		<MainContainer>
 			<Grid item lg={2}></Grid>
 			<Grid item xs={12} md={12} lg={8}>
 				<Grid container>
 					<Grid item xs={12}>
-						<Typography 
-								style={{fontSize: matchesXS ? '2rem' : null}}
-								variant="h1" color="primary" gutterBottom>
+						<Title>
 							{interpretHeading}
-							</Typography>
-						</Grid>
+						</Title>
+					</Grid>
 					<Grid item xs={12}>
 						<Grid container spacing={4}>
 							<Grid item xs={12} md={6}>
@@ -80,8 +58,7 @@ function TelephoneInterpreting() {
 				</Grid>
 			</Grid>
 			<Grid item lg={2}></Grid>
-		</Grid>
-		<div className={classes.toolbarMargin} />
+		</MainContainer>
 	</div>
 	);
 }

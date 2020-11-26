@@ -1,15 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
+import Alert from '@material-ui/lab/Alert';
 
-class FormError extends Component {
-  render(){
-    const {theMessage} = this.props;
-
-    return(
-      <div className="col-12 alert alert-danger px-2">
-      {theMessage}
-      </div>
-    )
-  }
+export default function FormError({ theMessage }) {
+	return <Alert severity="error">{theMessage}</Alert>;
 }
-
-export default FormError;

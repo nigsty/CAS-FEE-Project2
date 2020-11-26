@@ -2,15 +2,16 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core';
 
 import footerImg from '../../assets/footer-part2.png';
+//import footerImg from '../../assets/habescha-footer.svg';
 
 const useStyles = makeStyles((theme) => ({
 	footer: {
 		backgroundImage: `url(${footerImg})`,
 		backgroundRepeat: 'repeat-x',
 		width: '100%',
-		height: '1.8em',
+		height: '1.7em',
 		[theme.breakpoints.down('md')]: {
-			display: 'none'
+			display: 'none',
 		},
 	},
 	link: {
@@ -29,12 +30,12 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	tilet: {
-		[theme.breakpoints.down('lg')]: {			
+		[theme.breakpoints.down('lg')]: {
 			height: '6em',
-			backgroundRepeat: 'repeat-x'
+			backgroundRepeat: 'repeat-x',
 		},
 		[theme.breakpoints.down('md')]: {
-			display: 'none'
+			display: 'none',
 		},
 	},
 	mainContainer: {
@@ -47,7 +48,7 @@ export default function Footer() {
 
 	return (
 		<footer className={classes.footer}>
-		{/* 	<Grid container justify="space-between" className={classes.mainContainer}>
+			{/* 	<Grid container justify="space-between" className={classes.mainContainer}>
 				<Grid item>
 				<Typography variant="body2">
 					{'Copyright © '}

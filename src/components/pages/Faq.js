@@ -1,32 +1,14 @@
 import React from 'react';
-import { withStyles, makeStyles, useTheme, Grid, Typography, useMediaQuery } from '@material-ui/core';
+import { withStyles, makeStyles, Grid, Typography } from '@material-ui/core';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet';
+import { MainContainer, Title } from '../ui/ui-partials';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		padding: 20,
-	},
-	toolbarMargin: {
-		...theme.mixins.toolbar,
-		marginBottom: '1em',
-		[theme.breakpoints.down('md')]: {
-			marginBottom: '2em',
-		},
-		[theme.breakpoints.down('xs')]: {
-			marginBottom: '1.25em',
-		},
-	},
-	mainContainer: {
-		marginTop: '2em',
-		[theme.breakpoints.down('md')]: {
-			marginTop: '2em',
-		},
-		[theme.breakpoints.down('xs')]: {
-			marginTop: '1em',
-		},
 	},
 }));
 
@@ -81,8 +63,6 @@ const faqHeading = 'Häufig gestellte Fragen';
 
 function Faq() {
 	const classes = useStyles();
-	const theme = useTheme();
-	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
 	const [expanded, setExpanded] = React.useState(0);
 
@@ -104,26 +84,19 @@ function Faq() {
 					content="Habescha, Interkulturelles Dolmetschen, Telefondolmetschen, Tigrigna, Tigrinya, Amharisch, Deutsch"
 				/>
 			</Helmet>
-			<Grid container className={classes.mainContainer}>
-			<Grid item lg={2}/>
+			<MainContainer>
+				<Grid item lg={2} />
 				<Grid item xs={12} md={12} lg={8}>
 					<Grid container>
 						<Grid item xs={12}>
-							<Typography
-								style={{ fontSize: matchesXS ? '2rem' : null }}
-								variant="h1"
-								color="primary"
-								gutterBottom
-							>
-								{faqHeading}
-							</Typography>
+							<Title>{faqHeading}</Title>
 						</Grid>
 						<Grid item xs={12}>
 							<Grid container>
 								<Grid item xs={12} md={12}>
 									{faqContainer.map((faq, i) => {
 										return (
-											<div>
+											<div key={i}>
 												<Accordion square expanded={expanded === i} onChange={handleChange(i)}>
 													<AccordionSummary
 														aria-controls="panel1d-content"
@@ -143,9 +116,8 @@ function Faq() {
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item lg={2}/>
-			</Grid>
-			<div className={classes.toolbarMargin} />
+				<Grid item lg={2} />
+			</MainContainer>
 		</div>
 	);
 }

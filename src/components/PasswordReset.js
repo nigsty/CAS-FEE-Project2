@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/styles';
+import React, { useState } from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -8,15 +7,16 @@ import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
+import {Typography, makeStyles} from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import { useHistory } from 'react-router';
 
 import { passwordReset} from '../services/Firebase';
 import FormError from './FormError';
 
 import messages from './messages';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
 	paper: {
 		marginTop: theme.spacing(8),
 		display: 'flex',
@@ -34,89 +34,84 @@ const styles = (theme) => ({
 	submit: {
 		margin: theme.spacing(3, 0, 2),
 	},
-});
+}));
 
-class PasswordReset extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			email: '',
-			errorMessage: null,
-		};
+function PasswordReset() {
+	const [email, setEmail] = useState('');
+	const [errorMessage, setErrorMessage] = useState(null);
+	
+	const classes = useStyles();
+	let history = useHistory();
 
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	handleChange(e) {
+	const	handleChange = (e) => {
 		const itemName = e.target.name;
 		const itemValue = e.target.value;
 
-		this.setState({ [itemName]: itemValue });
+		if (itemName === 'email') {
+			setEmail(itemValue);
+		}
 	}
 
-	handleSubmit =  async(e) => {
+	const handleSubmit =  async(e) => {
 		var registrationInfo = {
-			email: this.state.email,
+			email: email,
 		};
 		e.preventDefault();
 		try {
 			await passwordReset(registrationInfo)
-			this.props.history.push('/signin');
+			history.push('/signin');
 		} catch(error) {
 				console.log('Firebase Error:', error.code, error);
 				if (error.message !== null) {
 					let errorMessage = messages[error.code] || error.message;
-					this.setState({ errorMessage });
+					setErrorMessage(errorMessage);
 				} else {
-					this.setState({ errorMessage: null });
+					setErrorMessage(null);
 				}
 		}			
 	}
-	render() {
-		const { classes } = this.props;
-		return (
-			<Container component="main" maxWidth="xs">
-				<CssBaseline />
-				<div className={classes.paper}>
-					<Avatar className={classes.avatar}>
-						<LockOutlinedIcon />
-					</Avatar>
-					<Typography component="h1" variant="h5">
-						Password reset
-					</Typography>
-					<form className={classes.form} noValidate onSubmit={this.handleSubmit}>
-						{this.state.errorMessage !== null ? <FormError theMessage={this.state.errorMessage} /> : null}
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							id="email"
-							label="Email Adresse"
-							name="email"
-							autoComplete="email"
-							autoFocus
-							value={this.state.email}
-							onChange={this.handleChange}
-						/>
-						{/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
-						<Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-							Email senden
-						</Button>
-						<Grid container>
-							<Grid item>
-								{'Neu bei Habesch? '}
-								<Link href="/signup" variant="body2">
-									{' Jetzt Registrieren.'}
-								</Link>
-							</Grid>
+
+	return (
+		<Container component="main" maxWidth="xs">
+			<CssBaseline />
+			<div className={classes.paper}>
+				<Avatar className={classes.avatar}>
+					<LockOutlinedIcon />
+				</Avatar>
+				<Typography component="h1" variant="h5">
+					Password reset
+				</Typography>
+				<form className={classes.form} noValidate onSubmit={handleSubmit}>
+					{errorMessage !== null ? <FormError theMessage={errorMessage} /> : null}
+					<TextField
+						variant="outlined"
+						margin="normal"
+						required
+						fullWidth
+						id="email"
+						label="Email Adresse"
+						name="email"
+						autoComplete="email"
+						autoFocus
+						value={email}
+						onChange={handleChange}
+					/>
+					<Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+						Email senden
+					</Button>
+					<Grid container>
+						<Grid item>
+							{'Neu bei Habesch? '}
+							<Link href="/signup" variant="body2">
+								{' Jetzt Registrieren.'}
+							</Link>
 						</Grid>
-					</form>
-				</div>
-			</Container>
-		);
-	}
+					</Grid>
+				</form>
+			</div>
+		</Container>
+	);
+	
 }
 
-export default withStyles(styles)(PasswordReset);
+export default PasswordReset;

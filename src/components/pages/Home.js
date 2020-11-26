@@ -23,12 +23,6 @@ const useStyles = makeStyles((theme) => ({
 	mainContainer: {
 		height: '100%',
 	},
-	homeLink: {
-		textDecoration: 'none',
-		'&:hover': {
-			textDecoration: 'none',
-		}
-	},
 	'@global': {
 		a: {			
 			'&:hover': {textDecoration: 'none',}
