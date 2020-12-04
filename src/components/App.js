@@ -78,7 +78,7 @@ const App = (props) => {
 	};
 
 	const handleDelete = async (appId) => {
-		const confirmed = window.confirm('Are you sure you want to delete?');
+		const confirmed = window.confirm('Sind Sie sicher, dass Sie löschen möchten?');
 		if (!confirmed) {
 			return;
 		}

@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 function Home(props) {
 	const classes = useStyles();
 	const { user} = props;	
-	console.log('test user' + user);
+	//console.log('test user' + user);
 	return (
 		<div className={classes.root}>
 			<Helmet>
