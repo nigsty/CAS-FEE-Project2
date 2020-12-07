@@ -1,22 +1,38 @@
 import React from 'react';
 import { MainContainer, Title } from '../ui/ui-partials';
-import { Typography, Avatar, Grid, makeStyles } from '@material-ui/core';
+import { Typography, Grid, makeStyles } from '@material-ui/core';
+import Avatar from "@material-ui/core/Avatar";
 import { Helmet } from 'react-helmet';
 
-import me from '../../assets/me.png';
+//import me from '../../assets/me.png';
+import me from '../../assets/cut-full-width-quarter2.jpg';
+import me2 from '../../assets/cut-full-width-quarter2-less-qual.jpg';
+import me3 from '../../assets/Nigsty-Equbamichael-Abreha1.jpg';
+import me4 from '../../assets/Nigsty-Equbamichael-Abreha1-less-qual.jpg';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		padding: 20,
 	},
 	large: {
-		width: '80%',
-		height: 'auto',
+		width: '25em',
+		height: '25em',
 		[theme.breakpoints.down('md')]: {
 			margin: 'auto',
 			display: 'block',
-			width: '80%',
+			width: '20em',
+			height: '20em'
 		},
+		avatar: {
+			height: "25em",
+			width: "25em",
+			[theme.breakpoints.down("sm")]: {
+				height: "20em",
+				width: "20em",
+				maxHeight: 300,
+				maxWidth: 300
+			}
+		}
 	},
 }));
 
@@ -46,6 +62,26 @@ function About() {
 					<Grid container>
 						<Grid item xs={12}>
 							<Title>{aboutMeHeading}</Title>
+						</Grid>
+						<Grid item xs={12}>
+							<Grid container spacing={4}>
+								<Grid item xs={12} md={6}>
+								<Avatar alt="Nigsty Abreha" src={me2} className={classes.large} />
+								</Grid>
+								<Grid item xs={12} md={6}>
+									<Avatar alt="Nigsty Abreha" src={me3} className={classes.large} />
+								</Grid>
+							</Grid>
+						</Grid>
+						<Grid item xs={12}>
+							<Grid container spacing={4}>
+								<Grid item xs={12} md={6}>
+								<Avatar alt="Nigsty Abreha" src={me4} className={classes.large} />
+								</Grid>
+								<Grid item xs={12} md={6}>
+									<Avatar alt="Nigsty Abreha" src={me3} className={classes.large} />
+								</Grid>
+							</Grid>
 						</Grid>
 						<Grid item xs={12}>
 							<Grid container spacing={4}>
