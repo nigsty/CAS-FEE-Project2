@@ -117,6 +117,7 @@ const useStyles = makeStyles((theme) => ({
 		zIndex: theme.zIndex.modal + 1,
 		backgroundColor: 'white',
 		color: theme.palette.common.green,
+		opacity: 1
 	},
 	testClasse: {
 		backgroundColor: theme.palette.common.red,

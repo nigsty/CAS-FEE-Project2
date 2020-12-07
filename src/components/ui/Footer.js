@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundImage: `url(${footerImg})`,
 		backgroundRepeat: 'repeat-x',
 		width: '100%',
-		height: '1.7em',
+		height: '1.8em',
 		[theme.breakpoints.down('md')]: {
 			display: 'none',
 		},

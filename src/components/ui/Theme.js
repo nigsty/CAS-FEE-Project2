@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core';
 
-const habeschaGreen = '#009444';
+const habeschaGreen = '#009245';
 const habeschaRed = '#F15A24';
 const habeschaBraun = '#F7931E';
 
@@ -23,7 +23,9 @@ const theme = createMuiTheme({
 		tab: {
 			textTransform: 'none',
 			fontFamily: 'Titillium Web',
-			fontSize: '1rem',
+			fontSize: '1.1rem',
+			fontWeight: 600,
+			opacity: 1,
 		},
 		h1: {
 			fontSize: '2.5rem',

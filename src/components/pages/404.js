@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, Grid, Link, Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
 import notFound from '../../assets/habescha-page-not-found.png';
 import notFoundMedium from '../../assets/habescha-page-not-found-medium.png';
@@ -10,26 +11,10 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 		height: '60vh'
 	},
-	paper: {
-		textAlign: 'center',
-		border: 'solid',
-		color: '#009444',
-		padding: '20px',
-		fontWeight: 'bold',
-		margin: 'auto',
-		maxWidth: 400,
-		[theme.breakpoints.down('xs')]: {
-			maxWidth: 250,
-		},
-	},
 	mainContainer: {
 		height: '100%',
 	},
-	'@global': {
-		a: {			
-			'&:hover': {textDecoration: 'none',}
-		}
-	}
+	
 }));
 
 function FourOhFour() {
@@ -45,13 +30,21 @@ function FourOhFour() {
 							</Grid>
 							<Grid item xs={12} md={6}>
 							<Typography variant="body1" gutterBottom align="center">
-										The page is not found. Sorry!
+										Diese Seite konnte nicht gefunden werden.
 									</Typography>
 							</Grid>
 						</Grid>
 					</Grid>
 					<Grid item>
-							<Link underline='none' href="./">				
+					<Button
+							component={Link}
+							to={'/'}
+							variant="contained"
+							color="secondary"
+						>
+							Zur Startseite
+						</Button>
+							<Link href="./">				
 								<Typography variant="body2">
 											Home
 								</Typography>
