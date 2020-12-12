@@ -25,7 +25,7 @@ function FourOhFour() {
 					<Grid item>
 						<Grid container alignItems="center" justify="center" spacing={4}>
 							<Grid item xs={12} md={6} align="center">
-								<img src={notFound} srcset={`${notFoundSmall} 320w,
+								<img src={notFound} srcset={`${notFoundSmall} 320w, title="Brocken headset"
 								${notFound} 800w, ${notFoundMedium} 1024w`} alt="Habescha page not found" />
 							</Grid>
 							<Grid item xs={12} md={6}>
