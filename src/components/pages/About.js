@@ -5,24 +5,29 @@ import Avatar from "@material-ui/core/Avatar";
 import { Helmet } from 'react-helmet';
 
 //import me from '../../assets/me.png';
-import me from '../../assets/cut-full-width-quarter2.jpg';
-import me2 from '../../assets/cut-full-width-quarter2-less-qual.jpg';
-import me3 from '../../assets/Nigsty-Equbamichael-Abreha1.jpg';
-import me4 from '../../assets/Nigsty-Equbamichael-Abreha1-less-qual.jpg';
+import me1 from '../../assets/Nigsty-Equbamichael-Abreha-410.jpg';
+//import me2 from '../../assets/Nigsty-Equbamichael-Abreha-410.avif';
+//import me3 from '../../assets/Nigsty-Equbamichael-Abreha-280-high-gut.jpg';
+//import me4 from '../../assets/Nigsty-Equbamichael-Abreha-280-low-31.jpg';
+//import me5 from '../../assets/Nigsty-Equbamichael-Abreha-280-medium-46.jpg';
+//import me6 from '../../assets/Nigsty-Equbamichael-Abreha-280-high.jpg';
+
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		padding: 20,
 	},
 	large: {
-		width: '25em',
-		height: '25em',
-		[theme.breakpoints.down('md')]: {
+		width: '13em',
+		height: '13em',
+		borderRadius: '50%',
+		[theme.breakpoints.down('sm')]: {
+			width: '16em',
+			height: '16em',
 			margin: 'auto',
 			display: 'block',
-			width: '20em',
-			height: '20em'
 		},
+
 		avatar: {
 			height: "25em",
 			width: "25em",
@@ -58,42 +63,32 @@ function About() {
 			</Helmet>
 			<MainContainer>
 				<Grid item lg={2} />
-				<Grid item xs={12} md={12} lg={8}>
+				<Grid item xs={12} md={9} lg={8}>
 					<Grid container>
 						<Grid item xs={12}>
 							<Title>{aboutMeHeading}</Title>
-						</Grid>
+						</Grid>					
 						<Grid item xs={12}>
 							<Grid container spacing={4}>
-								<Grid item xs={12} md={6}>
-								<Avatar alt="Nigsty Abreha" src={me2} className={classes.large} />
-								</Grid>
-								<Grid item xs={12} md={6}>
-									<Avatar alt="Nigsty Abreha" src={me3} className={classes.large} />
-								</Grid>
-							</Grid>
-						</Grid>
-						<Grid item xs={12}>
-							<Grid container spacing={4}>
-								<Grid item xs={12} md={6}>
-								<Avatar alt="Nigsty Abreha" src={me4} className={classes.large} />
-								</Grid>
-								<Grid item xs={12} md={6}>
-									<Avatar alt="Nigsty Abreha" src={me3} className={classes.large} />
-								</Grid>
-							</Grid>
-						</Grid>
-						<Grid item xs={12}>
-							<Grid container spacing={4}>
-								<Grid item xs={12} md={6}>
-									<Typography variant="body1" gutterBottom>
+								<Grid item xs={12} md={9}>
+									<Typography variant="body1" gutterBottom >
 										{aboutMeBodyText}
 									</Typography>
 								</Grid>
-								<Grid item xs={12} md={6}>
-									<Avatar alt="Nigsty Abreha" src={me} className={classes.large} />
+								<Grid item xs={12} md={3}>
+									<Avatar alt="Nigsty Abreha" src={me1} className={classes.large} />
 								</Grid>
 							</Grid>
+						</Grid>
+						<Grid item xs={12}>
+							{/* <Grid container spacing={4}>
+								<Grid item xs={12} md={3}>
+									<picture>
+									<source srcSet={me2} type="image/avif" className={classes.large} />
+									<img srcSet={me1} alt="AVIF example with JPEG fallback" className={classes.large}></img>
+									</picture>
+								</Grid>							
+							</Grid> */}
 						</Grid>
 					</Grid>
 				</Grid>

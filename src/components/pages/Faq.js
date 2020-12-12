@@ -93,7 +93,7 @@ function Faq() {
 						</Grid>
 						<Grid item xs={12}>
 							<Grid container>
-								<Grid item xs={12} md={12}>
+								<Grid item xs={12} md={9}>
 									{faqContainer.map((faq, i) => {
 										return (
 											<div key={i}>
