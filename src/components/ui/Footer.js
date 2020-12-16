@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 
-import footerImg from '../../assets/footer-part2.png';
+import footerImg from '../../assets/footer.png';
 //import footerImg from '../../assets/habescha-footer.svg';
 
 const useStyles = makeStyles((theme) => ({
