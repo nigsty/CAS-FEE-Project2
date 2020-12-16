@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { ThemeProvider } from '@material-ui/core';
 import { Route, Switch } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import {
@@ -20,14 +21,10 @@ import FourOhFour from './pages/404';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import PasswordReset from './PasswordReset';
-
 import Header from './ui/Header';
 import Footer from './ui/Footer';
 import MobileFooter from './ui/MobileFooter';
-
 import '../css/App.css';
-import { ThemeProvider } from '@material-ui/core';
-
 import theme from '../components/ui/Theme';
 
 const App = (props) => {

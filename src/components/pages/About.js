@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		padding: 20,
 	},
-	large: {
+	avatar: {
 		width: '13em',
 		height: '13em',
 		borderRadius: '50%',
@@ -28,16 +28,6 @@ const useStyles = makeStyles((theme) => ({
 			display: 'block',
 		},
 
-		avatar: {
-			height: "25em",
-			width: "25em",
-			[theme.breakpoints.down("sm")]: {
-				height: "20em",
-				width: "20em",
-				maxHeight: 300,
-				maxWidth: 300
-			}
-		}
 	},
 }));
 
@@ -76,20 +66,20 @@ function About() {
 									</Typography>
 								</Grid>
 								<Grid item xs={12} md={3}>
-									<Avatar alt="Nigsty Abreha" src={me1} className={classes.large} />
+									<Avatar alt="Nigsty Abreha" src={me1} className={classes.avatar} />
 								</Grid>
 							</Grid>
 						</Grid>
-						<Grid item xs={12}>
-							{/* <Grid container spacing={4}>
+						{/* <Grid item xs={12}>
+							<Grid container spacing={4}>
 								<Grid item xs={12} md={3}>
 									<picture>
-									<source srcSet={me2} type="image/avif" className={classes.large} />
-									<img srcSet={me1} alt="AVIF example with JPEG fallback" className={classes.large}></img>
+										<source srcset={me2} type="image/avif" className={classes.avatar}/>
+										<img src={me1} alt="AVIF with JPEG fallback" className={classes.avatar}></img>
 									</picture>
 								</Grid>							
-							</Grid> */}
-						</Grid>
+							</Grid>
+						</Grid> */}
 					</Grid>
 				</Grid>
 				<Grid item lg={2} />

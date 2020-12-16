@@ -51,9 +51,9 @@ const theme = createMuiTheme({
 theme.props = {
 	MuiButton: {
 		disableElevation: true,
-		textTransform: 'none',
+		//textTransform: 'none',
 	},
-	MuiInputLable: {
+	MuiInputLabel: {
 		//shrink: true
 	},
 	MuiInput: {
@@ -66,13 +66,13 @@ theme.overrides = {
 		root: {
 			color: 'green',
 			'&:focus': {
-				outline: 'none', 
+				outline: 'none',
 			},
-			textTransform:'none',
+			textTransform: 'none',
 			'&:hover': {
 				color: 'white',
 			},
-		}
+		},
 	},
 	MuiLink: {
 		underlineHover: {
@@ -81,7 +81,7 @@ theme.overrides = {
 				color: theme.palette.common.red,
 			},
 		},
-	},	
+	},
 	MuiInput: {
 		root: {
 			top: theme.spacing(2),
@@ -89,13 +89,12 @@ theme.overrides = {
 			padding: theme.spacing(1),
 		},
 	},
-	MuiInputLable: {
+	MuiInputLabel: {
 		root: {
-			textTransform: 'uppercase',
+			//textTransform: 'none',
 			fontSize: '1.5rem',
 		},
 	},
-
 };
 
 export default theme;
