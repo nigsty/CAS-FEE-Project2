@@ -22,7 +22,7 @@ function TelephoneInterpreting() {
 		<div className={classes.root}>
 			<Helmet>
 				<title>Habescha: Interkulturelles Telefondolmetschen </title>
-				<link rel="canonical" href="http://habescha.ch/home" />
+				<link rel="canonical" href="http://habescha.ch/interpreting" />
 				<meta
 					name="description"
 					content="Habescha: Das Telefondolmetschdienst für Tigrinya, Amharisch, Deutsch"

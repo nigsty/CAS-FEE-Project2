@@ -74,7 +74,7 @@ function Faq() {
 		<div className={classes.root}>
 			<Helmet>
 				<title>Habescha: Häufig gestellte Fragen</title>
-				<link rel="canonical" href="http://habescha.ch/home" />
+				<link rel="canonical" href="http://habescha.ch/faq" />
 				<meta
 					name="description"
 					content="Habescha: Interkulturelles Telefon-Dolmetschen für Tigrinya, Amharisch, Deutsch"

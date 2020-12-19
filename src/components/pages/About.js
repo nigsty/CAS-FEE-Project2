@@ -41,7 +41,7 @@ function About() {
 		<div className={classes.root}>
 			<Helmet>
 				<title>Habescha: Nigsty Abreha </title>
-				<link rel="canonical" href="http://habescha.ch/home" />
+				<link rel="canonical" href="http://habescha.ch/about" />
 				<meta
 					name="description"
 					content="Habescha: Interkulturelles Telefon-Dolmetschen für Tigrinya, Amharisch, Deutsch"

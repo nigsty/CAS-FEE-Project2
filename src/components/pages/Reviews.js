@@ -118,7 +118,7 @@ function Reviews() {
 		<>
 			<Helmet>
 				<title>Habescha: Kundenbewertungen </title>
-				<link rel="canonical" href="http://habescha.ch/home" />
+				<link rel="canonical" href="http://habescha.ch/reviews" />
 				<meta
 					name="description"
 					content="Habescha: Interkulturelles Telefon-Dolmetschen für Tigrinya, Amharisch, Deutsch"
