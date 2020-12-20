@@ -20,7 +20,6 @@ const theme = createMuiTheme({
 	},
 	typography: {
 		fontFamily: 'Titillium Web',
-		fontDisplay: 'swap',
 		tab: {
 			textTransform: 'none',
 			fontFamily: 'Titillium Web',
