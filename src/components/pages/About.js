@@ -32,8 +32,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const aboutMeHeading = 'I am habescha';
-const aboutMeBodyText =
-	'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. ';
+const aboutMeBody =	(
+	<span>
+	Mein Name ist <strong>Nigsty Equbamichael Abreha</strong>. Im Jahre 1998 kam ich aus meinem Heimatland Äthiopien, in dem ich geboren und aufgewachsen bin, in die Schweiz. Meine Muttersprachen sind <strong>Tigrinya und Amharisch</strong>. Ich bin Mutter einer 14-jährigen Tochter, welche Schülerin einer Sekundarschule ist. Ich bin als Frontend Web-Entwicklerin tätig. Weiterhin erhielt ich das <strong>Zertifikat Interpret</strong> zum interkulturellen Dolmetschen, was mich dazu befähigte von 2010 bis 2019 als <strong>interkulturelle Dolmetscherin vor Ort bei KOMIN</strong>, sowie als Femmes-Tische Moderatorin, zu arbeiten.  Seit März 2019 bin ich nun <strong>bei HEKS </strong> als <strong>interkulturelle Telefondolmetscherin</strong> bei beschleunigten Asylverfahren bezüglich Rechtsschutzes in Bundesasylzentren tätig.<br /><strong>Habescha</strong> ist der Oberbegriff für Menschen aus Äthiopien und Eritrea.
+	</span>
+);
 
 function About() {
 	const classes = useStyles();
@@ -52,8 +55,8 @@ function About() {
 				/>
 			</Helmet>
 			<MainContainer>
-				<Grid item lg={2} />
-				<Grid item xs={12} md={9} lg={8}>
+				<Grid item md={2} />
+				<Grid item xs={12} md={8} lg={8}>
 					<Grid container>
 						<Grid item xs={12}>
 							<Title>{aboutMeHeading}</Title>
@@ -61,28 +64,18 @@ function About() {
 						<Grid item xs={12}>
 							<Grid container spacing={4}>
 								<Grid item xs={12} md={9}>
-									<Typography variant="body1" gutterBottom >
-										{aboutMeBodyText}
+									<Typography variant="body1">
+										{aboutMeBody}
 									</Typography>
 								</Grid>
-								<Grid item xs={12} md={3}>
+								<Grid item xs={12} md={2}>
 									<Avatar alt="Nigsty Abreha" src={me1} className={classes.avatar} />
 								</Grid>
 							</Grid>
 						</Grid>
-						{/* <Grid item xs={12}>
-							<Grid container spacing={4}>
-								<Grid item xs={12} md={3}>
-									<picture>
-										<source srcset={me2} type="image/avif" className={classes.avatar}/>
-										<img src={me1} alt="AVIF with JPEG fallback" className={classes.avatar}></img>
-									</picture>
-								</Grid>							
-							</Grid>
-						</Grid> */}
 					</Grid>
 				</Grid>
-				<Grid item lg={2} />
+				<Grid item md={2} />
 			</MainContainer>
 		</div>
 	);

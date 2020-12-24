@@ -10,11 +10,25 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		padding: 20,
 	},
+	ol: {paddingLeft: 19,
+			marginTop: 0}
 }));
 
 const interpretHeading = 'Telefondolmetschen';
-const interpretBodyText = 	
-'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. ';
+const InterpretBody = () =>{
+	const classes = useStyles();
+	return (
+	<span>
+	Telefondolmetschen funktioniert genauso wie Dolmetschen vor Ort, nur ohne die Voraussetzung, dass sich die Teilnehmenden am gleichen Platz befinden müssen. Der Service, welchen Habescha bereitstellt, soll zur Überbrückung für Eritreer und Äthiopier, deren Sprachen Amharisch und Tigrinisch ist, dienen.
+	<br /><br /><strong>Was sind die Vorteile von Telefondolmetschen?</strong><br />Durch Telefondolmetschen ergibt sich eine effektivere Kommunikation, da das Übersetzen durch eine trainierte, erfahrene und professionell tätige Dolmetscherin stattfindet. Somit werden Informationsverlust sowie potenzielle Missverständnisse vermieden. Weiterhin ist dies eine effiziente und kostengünstige Alternative zur herkömmlichen Art der Sprachmittlung, da der Übersetzer nicht vor Ort präsent sein muss, um den Service zur Verfügung zu stellen. <br /><br /><strong>Wie funktioniert Telefondolmetschen?</strong>
+	<ol className={classes.ol}>
+	<li>Zunächst registriert man sich über das Anmeldeformular, woraufhin man zur Terminvereinbarung weitergeleitet wird.</li>
+	<li>Am vereinbarten Termin wählen Sie die folgende Telefonnummer: 07X XXX XX XX.</li>									<li>Voraussetzung ist, dass Sie sich am selben Ort wie Ihr Gesprächspartner, mit dem Sie sich verständigen möchten, befinden. Nun erklären Sie Ihre Ausgangssituation sowie das Gesprächsziel. Daraufhin betätigen Sie an Ihrem Telefon den Lautsprecher, um das Gespräch mit Hilfe des Telefondolmetschers sofort zu starten.</li>
+	<li>Die Abrechnung des Dolmetscherdienstes erfolgt per E-mail.</li>
+	<li>Ihre Meinung ist sehr wichtig. Hinterlassen Sie bitte ein Feedback unter dem Formular «Rezension schreiben».</li>
+	</ol>
+	</span>
+)};
 
 function TelephoneInterpreting() {
 	const classes = useStyles();
@@ -33,8 +47,8 @@ function TelephoneInterpreting() {
 				/>
 		</Helmet>
 		<MainContainer>
-			<Grid item lg={2}></Grid>
-			<Grid item xs={12} md={12} lg={8}>
+			<Grid item md={2}/>
+			<Grid item xs={12} md={10} lg={8}>
 				<Grid container>
 					<Grid item xs={12}>
 						<Title>
@@ -43,21 +57,16 @@ function TelephoneInterpreting() {
 					</Grid>
 					<Grid item xs={12}>
 						<Grid container spacing={4}>
-							<Grid item xs={12} md={6}>
-							<Typography variant="body1" gutterBottom>
-								{interpretBodyText}
+							<Grid item xs={12} md={9}>
+							<Typography variant="body1" component={'span'} >
+								<InterpretBody/>
 							</Typography>
-							</Grid>
-							<Grid item xs={12} md={6}>
-								<Typography variant="body1" gutterBottom>
-									{interpretBodyText}
-								</Typography>
 							</Grid>
 						</Grid>
 					</Grid>
 				</Grid>
 			</Grid>
-			<Grid item lg={2}></Grid>
+			<Grid item md={2}></Grid>
 		</MainContainer>
 	</div>
 	);

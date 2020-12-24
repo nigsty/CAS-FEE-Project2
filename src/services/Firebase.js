@@ -26,9 +26,9 @@ export const onAuthStateChanged = (cb) => {
 
 export const getAppointments = async ({ all }) => {
 	if (all) {
-		console.log('[getAppointments] ALL', auth.currentUser.uid);
+		//console.log('[getAppointments] ALL', auth.currentUser.uid);
 	} else {
-		console.log('[getAppointments] for uid', auth.currentUser.uid);
+		//console.log('[getAppointments] for uid', auth.currentUser.uid);
 	}
 	let query = db.collection('appointments');
 	if (!all) {

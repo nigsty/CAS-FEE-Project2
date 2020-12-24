@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -17,6 +17,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import logo from '../../assets/habescha-web-interpret-logo.svg';
 import hamburger from '../../assets/hamburger.svg';
+
+
 
 function ElevationScroll(props) {
 	const { children } = props;
@@ -127,6 +129,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Header(props) {
 	const classes = useStyles();
 	const theme = useTheme();
+	const location = useLocation();
 	const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -139,9 +142,10 @@ export default function Header(props) {
 		setValue(value);
 	};
 
-	const activeIndex = () => {
-		const found = routes.indexOf(routes.filter(({ name, link }) => link === window.location.pathname)[0]);
+	//console.log('location:' , location.pathname)
 
+	const activeIndex = () => {
+		const found = routes.indexOf(routes.filter(({ name, link }) => link === location.pathname)[0]);
 		return found === -1 ? false : found;
 	};
 
@@ -260,7 +264,7 @@ export default function Header(props) {
 							component={Link}
 							to="/"
 							disableRipple
-							//onClick={() => props.setValue(0)}
+							onClick={() => setValue(0)}
 							className={classes.logoContainer}
 						>
 							<img alt="Habescha logo" className={classes.logo} src={logo} />

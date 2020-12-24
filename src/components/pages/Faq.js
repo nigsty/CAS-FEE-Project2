@@ -54,9 +54,34 @@ const AccordionSummary = withStyles({
 })(MuiAccordionSummary);
 
 const faqContainer = [
-	{ heading: 'Frage 1', body: 'Body text 1' },
-	{ heading: 'Frage 2', body: 'Body text 2' },
-	{ heading: 'Frage 3', body: 'Body text 3' },
+	{
+		heading: 'Was ist interkulturelles Dolmetschen?',
+		body:
+			'Interkulturelles Dolmetschen bezeichnet die mündliche Übertragung (in der Regel Konsekutivdolmetschen) des Gesprochenen von einer Sprache in eine andere unter Berücksichtigung des sozialen und kulturellen Hintergrunds der Gesprächsteilnehmenden. Es findet in einer Trialogsituation – einem «Dialog zu Dritt» – statt. Dabei kann die/der interkulturell Dolmetschende physisch vor Ort sein oder via Telefon / Video  zugeschaltet werden.',
+	},
+	{
+		heading: 'Was ist Dolmetschen?',
+		body:
+			'Dolmetschen bezeichnet die Übertragung eines nicht fixierten, also in der Regel gesprochenen Texts, mündlich (oder mittels Gebärdensprache) von einer Sprache in eine andere.',
+	},
+	{
+		heading: 'Was ist Übersetzen?',
+		body:
+			'Übersetzen ist die Übertragung der Bedeutung eines (meist schriftlich) fixierten Textes in einer Ausgangssprache in eine Zielsprache; anderseits versteht man darunter das Ergebnis dieses Vorgangs.',
+	},
+	{
+		heading: 'Welche Techniken im Dolmetschen gibt es?',
+		body: (
+			<span>
+				<strong>1. Konsekutivdolmetschen</strong> wird manchmal auch als Verhandlungsdolmetschen bezeichnet
+				(also Segment für Segment). Der/die Dolmetscher/-in wartet bis der Sprecher seinen Redebeitrag jeweils
+				beendet hat, um dann diesen in die Sprache des Zuhörers zu übersetzen <br /><strong>2. Flüsterdolmetschen</strong> ist eine
+				Technik des Dolmetschens, bei der der Dolmetscher in das Ohr des Zuhörers flüstert. <br /><strong>3.
+				Simultandolmetschen (Konferenzdolmetschen)</strong> ist eine Technik, bei welcher Redebeiträge „fast in Echtzeit“
+				übertragen werden.
+			</span>
+		),
+	},
 ];
 
 const faqHeading = 'Häufig gestellte Fragen';
@@ -85,8 +110,8 @@ function Faq() {
 				/>
 			</Helmet>
 			<MainContainer>
-				<Grid item lg={2} />
-				<Grid item xs={12} md={12} lg={8}>
+				<Grid item md={2} />
+				<Grid item xs={12} md={10} lg={8}>
 					<Grid container>
 						<Grid item xs={12}>
 							<Title>{faqHeading}</Title>

@@ -40,7 +40,7 @@ const theme = createMuiTheme({
 		body1: {
 			fontSize: '1.2rem',
 			color: '#4a4a4a',
-			textAlign: 'justify',
+			// textAlign: 'justify',
 		},
 		body2: {
 			color: '#272727',
