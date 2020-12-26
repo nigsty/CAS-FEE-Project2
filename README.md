@@ -26,6 +26,6 @@
 ### 1. Eigene Projektidee & Wireframes [(PDF)](Projekidee-und-Mockups-Dokumentation.pdf)
 ### 2. Projektumsetzung
 * Gebrauchte Technologien
- * React
+  * React
  * Material UI
  * Firebase
