@@ -23,5 +23,5 @@
 [Aufgabe detail beschreibung (pdf)](Projekt2-beschreibung.pdf)
 
 ## Lösung
-### Eigene Projektidee & Wireframes [(PDF)](Projekidee-und-Mockups-Dokumentation.pdf)
-### Projectumsetzung
+### 1. Eigene Projektidee & Wireframes [(PDF)](Projekidee-und-Mockups-Dokumentation.pdf)
+### 2. Projectumsetzung
