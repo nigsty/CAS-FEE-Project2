@@ -24,3 +24,8 @@
 
 ## Lösung
 ### Eigene Projektidee & Wireframes [(PDF)](Projekidee-und-Mockups-Dokumentation.pdf)
+### Projekt projektumsetzung gebrauchte Technologien
+* React
+* Material UI
+* Firebase
+
