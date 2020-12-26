@@ -29,6 +29,9 @@
   * React
   * Material UI
   * Firebase
+* Create, authorize, and redirect users
+* Allow users to Make and Edit Appointment
+* Allow users to write Reviews
   
 ### 3. Installation
 * "npm install"
