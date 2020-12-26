@@ -55,11 +55,6 @@ const AccordionSummary = withStyles({
 
 const faqContainer = [
 	{
-		heading: 'Was ist interkulturelles Dolmetschen?',
-		body:
-			'Interkulturelles Dolmetschen bezeichnet die mündliche Übertragung (in der Regel Konsekutivdolmetschen) des Gesprochenen von einer Sprache in eine andere unter Berücksichtigung des sozialen und kulturellen Hintergrunds der Gesprächsteilnehmenden. Es findet in einer Trialogsituation – einem «Dialog zu Dritt» – statt. Dabei kann die/der interkulturell Dolmetschende physisch vor Ort sein oder via Telefon / Video  zugeschaltet werden.',
-	},
-	{
 		heading: 'Was ist Dolmetschen?',
 		body:
 			'Dolmetschen bezeichnet die Übertragung eines nicht fixierten, also in der Regel gesprochenen Texts, mündlich (oder mittels Gebärdensprache) von einer Sprache in eine andere.',
@@ -82,6 +77,11 @@ const faqContainer = [
 			</span>
 		),
 	},
+	{
+		heading: 'Was ist interkulturelles Dolmetschen?',
+		body:
+			'Interkulturelles Dolmetschen bezeichnet die mündliche Übertragung (in der Regel Konsekutivdolmetschen) des Gesprochenen von einer Sprache in eine andere unter Berücksichtigung des sozialen und kulturellen Hintergrunds der Gesprächsteilnehmenden. Es findet in einer Trialogsituation – einem «Dialog zu Dritt» – statt. Dabei kann die/der interkulturell Dolmetschende physisch vor Ort sein oder via Telefon / Video  zugeschaltet werden.',
+	}
 ];
 
 const faqHeading = 'Häufig gestellte Fragen';
