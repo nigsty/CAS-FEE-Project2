@@ -27,5 +27,5 @@
 ### 2. Projektumsetzung
 * Gebrauchte Technologien
   * React
- * Material UI
- * Firebase
+  * Material UI
+  * Firebase
