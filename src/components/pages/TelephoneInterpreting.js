@@ -65,7 +65,7 @@ function TelephoneInterpreting() {
 					<Grid item xs={12}>
 						<Grid container spacing={4}>
 							<Grid item xs={12} md={9}>
-							<Typography variant="body1" gutterBottom>
+							<Typography variant="body1" component={'span'} gutterBottom>
 								<InterpretBody/>
 							</Typography>
 							</Grid>
