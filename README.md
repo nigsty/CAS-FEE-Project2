@@ -29,3 +29,8 @@
   * React
   * Material UI
   * Firebase
+  
+### Installation
+* "npm install"
+* "npm start"
+* Die Webseite ist unter http://localhost:3000/  oder auf dem Web Firebase unter https://habescha-fee.web.app/ erreichbar.
