@@ -150,7 +150,7 @@ export default function Header(props) {
 	};
 
 	const routes = [
-		{ name: 'Home', link: '/', activeIndex: 0 },
+		{ name: ' + Termin', link: '/', activeIndex: 0 },
 		{ name: 'Telefondolmetschen', link: '/interpreting', activeIndex: 1 },
 		{ name: 'Kundenbewertungen', link: '/reviews', activeIndex: 2 },
 		{ name: 'FAQ', link: '/faq', activeIndex: 3 },
