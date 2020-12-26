@@ -20,7 +20,7 @@
 * SEO
 * Versuchen die Webseite auf IE8 ausführen
 
-[Aufgabe detail beschreibung (pdf)](Projekt2-beschreibung.pdf)
+  * [Aufgabe detail beschreibung (pdf)](Projekt2-beschreibung.pdf)
 
 ## Lösung
 ### 1. Eigene Projektidee & Wireframes [(PDF)](Projekidee-und-Mockups-Dokumentation.pdf)
