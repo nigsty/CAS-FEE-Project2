@@ -36,4 +36,4 @@
 ### 3. Installation
 * "npm install"
 * "npm start"
-* Die Webseite ist unter [Local](http://localhost:3000/)  oder auf dem Web (Firebase deploy) unter [Habescha](https://habescha-fee.web.app) erreichbar.
+* Die Webseite ist unter [http://localhost:3000/](http://localhost:3000/)  oder auf dem Web (Firebase deploy) unter [Habescha](https://habescha-fee.web.app) erreichbar.
