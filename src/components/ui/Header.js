@@ -224,25 +224,6 @@ export default function Header(props) {
 							</ListItemText>
 						</ListItem>
 					))}
-					<ListItem
-						onClick={() => {
-							setOpenDrawer(false);
-							setValue(5);
-						}}
-						divider
-						button
-						component={Link}
-						classes={{
-							root: classes.drawerItemTermin,
-							selected: classes.drawerItemSelected,
-						}}
-						to="/appointments"
-						selected={value === 5}
-					>
-						<ListItemText className={classes.drawerItem} disableTypography>
-							Termin vereinbaren?
-						</ListItemText>
-					</ListItem>
 				</List>
 			</SwipeableDrawer>
 			<IconButton
