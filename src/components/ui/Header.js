@@ -17,8 +17,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import logo from '../../assets/habescha-web-interpret-logo.svg';
 import hamburger from '../../assets/hamburger.svg';
-
-
+import addAppointment from '../../assets/add-appointment.png';
 
 function ElevationScroll(props) {
 	const { children } = props;
@@ -107,10 +106,11 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.common.green,
 		opacity: 0.8,
 	},
-	drawerItemTermin: {
-		backgroundColor: theme.palette.common.red,
-	},
 	drawerItemSelected: {
+		backgroundColor: `rgba(241, 104, 36, .06) !important`,
+		'&:hover': {
+			backgroundColor: `rgba(241, 104, 36, .06) !important`
+		},
 		'&. MuiListItemText-root': {
 			opacity: 1,
 		},
@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
 		zIndex: theme.zIndex.modal + 1,
 		backgroundColor: 'white',
 		color: theme.palette.common.green,
-		opacity: 1
+		opacity: 1,
 	},
 	testClasse: {
 		backgroundColor: theme.palette.common.red,
@@ -150,7 +150,22 @@ export default function Header(props) {
 	};
 
 	const routes = [
-		{ name: ' + Termin', link: '/', activeIndex: 0 },
+		{
+			name: (
+				<span>
+					{' '}
+					<img
+						width="24"
+						height="24"
+						src={addAppointment}
+						style={{verticalAlign: 'bottom'}}
+					/>{' '}
+					Termin
+				</span>
+			),
+			link: '/',
+			activeIndex: 0,
+		},
 		{ name: 'Telefondolmetschen', link: '/interpreting', activeIndex: 1 },
 		{ name: 'Kundenbewertungen', link: '/reviews', activeIndex: 2 },
 		{ name: 'FAQ', link: '/faq', activeIndex: 3 },
@@ -231,7 +246,6 @@ export default function Header(props) {
 				onClick={() => setOpenDrawer(!openDrawer)}
 				disableRipple
 			>
-				{/* <MenuIcon className={classes.drawerIcon} /> */}
 				<img alt="" src={hamburger} className={classes.drawerIcon} />
 			</IconButton>
 		</React.Fragment>

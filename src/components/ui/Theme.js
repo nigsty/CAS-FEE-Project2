@@ -1,8 +1,8 @@
 import { createMuiTheme } from '@material-ui/core';
 
-const habeschaGreen = '#009245';
-const habeschaRed = '#F15A24';
-const habeschaBraun = '#F7931E';
+const habeschaGreen = '#059348';
+const habeschaRed = '#F16824';
+const habeschaBraun = '#F69322';
 
 const theme = createMuiTheme({
 	palette: {
