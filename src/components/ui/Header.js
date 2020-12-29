@@ -157,6 +157,7 @@ export default function Header(props) {
 					<img
 						width="24"
 						height="24"
+						alt="add appointment icon"
 						src={addAppointment}
 						style={{verticalAlign: 'bottom'}}
 					/>{' '}
