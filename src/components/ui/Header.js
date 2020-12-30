@@ -104,15 +104,14 @@ const useStyles = makeStyles((theme) => ({
 	drawerItem: {
 		...theme.typography.tab,
 		color: theme.palette.common.green,
-		opacity: 0.8,
+		opacity: 0.8
 	},
 	drawerItemSelected: {
-		backgroundColor: `rgba(241, 104, 36, .06) !important`,
+		backgroundColor: `rgba(241, 104, 36, .09) !important`,
+	},
+	drawerItemHover: {
 		'&:hover': {
-			backgroundColor: `rgba(241, 104, 36, .06) !important`
-		},
-		'&. MuiListItemText-root': {
-			opacity: 1,
+			backgroundColor: `rgba(241, 104, 36, .06)`,
 		},
 	},
 	appbar: {
@@ -124,6 +123,7 @@ const useStyles = makeStyles((theme) => ({
 	testClasse: {
 		backgroundColor: theme.palette.common.red,
 	},
+
 }));
 
 export default function Header(props) {
@@ -154,8 +154,8 @@ export default function Header(props) {
 			name: (
 				<span>
 					<img
-						width="24"
-						height="24"
+						width="25"
+						height="25"
 						alt="add appointment icon"
 						src={addAppointment}
 						style={{verticalAlign: 'bottom'}}
@@ -228,7 +228,8 @@ export default function Header(props) {
 							component={Link}
 							to={route.link}
 							selected={value === route.activeIndex}
-							classes={{ selected: classes.drawerItemSelected }}
+							classes={{ selected: classes.drawerItemSelected}}
+							className={classes.drawerItemHover}
 							onClick={() => {
 								setOpenDrawer(false);
 								setValue(route.activeIndex);

@@ -30,7 +30,7 @@ const InterpretBody = () => {
 		<span>
 			Telefondolmetschen funktioniert genauso wie Dolmetschen vor Ort, nur ohne die Voraussetzung, dass sich die
 			Teilnehmenden am gleichen Platz befinden müssen. Der Service, welchen Habescha bereitstellt, soll zur
-			Überbrückung für Eritreer und Äthiopier, deren Sprachen Amharisch und Tigrinisch ist, dienen.
+			Überbrückung für Eritreer und Äthiopier, deren Sprachen Amharisch und Tigrinya ist, dienen.
 			<h2 className={classes.h2}>Was sind die Vorteile von Telefondolmetschen?</h2>Durch Telefondolmetschen ergibt
 			sich eine effektivere Kommunikation, da das Übersetzen durch eine trainierte, erfahrene und professionell
 			tätige Dolmetscherin stattfindet. Somit werden Informationsverlust sowie potenzielle Missverständnisse
