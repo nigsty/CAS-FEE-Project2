@@ -111,14 +111,14 @@ function Faq() {
 			</Helmet>
 			<MainContainer>
 				<Grid item md={2} />
-				<Grid item xs={12} md={10} lg={8}>
+				<Grid item xs={12} md={8}>
 					<Grid container>
 						<Grid item xs={12}>
 							<Title>{faqHeading}</Title>
 						</Grid>
 						<Grid item xs={12}>
 							<Grid container>
-								<Grid item xs={12} md={9}>
+								<Grid item xs={12} md={10}>
 									{faqContainer.map((faq, i) => {
 										return (
 											<div key={i}>

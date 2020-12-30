@@ -63,17 +63,17 @@ function About() {
 			</Helmet>
 			<MainContainer>
 				<Grid item md={2} />
-				<Grid item xs={12} md={8} lg={8}>
+				<Grid item xs={12} md={8}>
 					<Grid container>
 						<Grid item xs={12}>
 							<Title>{aboutMeHeading}</Title>
 						</Grid>
 						<Grid item xs={12}>
 							<Grid container spacing={4}>
-								<Grid item xs={12} md={9}>
+								<Grid item xs={12} md={8}>
 									<Typography variant="body1">{aboutMeBody}</Typography>
 								</Grid>
-								<Grid item xs={12} md={2}>
+								<Grid item xs={12} md={4}>
 									<Avatar alt="Nigsty Abreha" src={me1} className={classes.avatar} />
 								</Grid>
 							</Grid>
