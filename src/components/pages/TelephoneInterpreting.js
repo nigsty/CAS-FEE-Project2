@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Typography } from '@material-ui/core';
+import { makeStyles, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { Helmet } from 'react-helmet';
 import { MainContainer, Title } from '../ui/ui-partials';
@@ -26,17 +26,19 @@ const useStyles = makeStyles((theme) => ({
 const interpretHeading = 'Telefondolmetschen';
 const InterpretBody = () => {
 	const classes = useStyles();
+	const theme = useTheme();
+	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 	return (
 		<span>
 			Telefondolmetschen funktioniert genauso wie Dolmetschen vor Ort, nur ohne die Voraussetzung, dass sich die
 			Teilnehmenden am gleichen Platz befinden müssen. Der Service, welchen Habescha bereitstellt, soll zur
 			Überbrückung für Eritreer und Äthiopier, deren Sprachen Amharisch und Tigrinya ist, dienen.
-			<h2 className={classes.h2}>Was sind die Vorteile von Telefondolmetschen?</h2>Durch Telefondolmetschen ergibt
+			<h2 style={{fontSize: matchesXS ? '1.1rem' : null }} className={classes.h2}>Was sind die Vorteile von Telefondolmetschen?</h2>Durch Telefondolmetschen ergibt
 			sich eine effektivere Kommunikation, da das Übersetzen durch eine trainierte, erfahrene und professionell
 			tätige Dolmetscherin stattfindet. Somit werden Informationsverlust sowie potenzielle Missverständnisse
 			vermieden. Weiterhin ist dies eine effiziente und kostengünstige Alternative zur herkömmlichen Art der
 			Sprachmittlung, da der Übersetzer nicht vor Ort präsent sein muss, um den Service zur Verfügung zu stellen.{' '}
-			<h2 className={classes.h2}>Wie funktioniert Telefondolmetschen?</h2>
+			<h2 style={{fontSize: matchesXS ? '1.1rem' : null }} className={classes.h2}>Wie funktioniert Telefondolmetschen?</h2>
 			<ol className={classes.ol}>
 				<li>
 					Zunächst registriert man sich über das{' '}
@@ -61,7 +63,7 @@ const InterpretBody = () => {
 					.
 				</li>
 			</ol>
-			<h2 className={classes.h2}>Was sind die Kosten für die Dienstleistung des Telefondolmetschens?</h2>			
+			<h2 style={{fontSize: matchesXS ? '1.1rem' : null }} className={classes.h2}>Was sind die Kosten für die Dienstleistung des Telefondolmetschens?</h2>			
 			Die genannte Dienstleistung kostet 90 CHF pro Stunde. Ab einem Minimum von 30 Minuten (45 CHF) werden jede
 			15 Minuten angerechnet.
 		</span>
