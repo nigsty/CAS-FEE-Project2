@@ -94,8 +94,8 @@ function TelephoneInterpreting() {
 							<Title>{interpretHeading}</Title>
 						</Grid>
 						<Grid item xs={12}>
-							<Grid container spacing={4}>
-								<Grid item xs={12} md={10}>
+							<Grid container>
+								<Grid item xs={12} lg={10} xl={8}>
 									<Typography variant="body1" component={'span'} gutterBottom>
 										<InterpretBody />
 									</Typography>
