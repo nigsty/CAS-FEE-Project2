@@ -130,7 +130,7 @@ function Faq() {
 														<Typography>{faq.heading}</Typography>
 													</AccordionSummary>
 													<AccordionDetails>
-														<Typography>{faq.body}</Typography>
+														<Typography component={'span'}>{faq.body}</Typography>
 													</AccordionDetails>
 												</Accordion>
 											</div>
