@@ -68,12 +68,12 @@ const faqContainer = [
 		heading: 'Welche Techniken im Dolmetschen gibt es?',
 		body: (
 			<span>
-				<strong>1. Konsekutivdolmetschen</strong> wird manchmal auch als Verhandlungsdolmetschen bezeichnet
+				<ol className={'ol'}>
+				<li><strong>Konsekutivdolmetschen</strong> wird manchmal auch als Verhandlungsdolmetschen bezeichnet
 				(also Segment für Segment). Der/die Dolmetscher/-in wartet bis der Sprecher seinen Redebeitrag jeweils
-				beendet hat, um dann diesen in die Sprache des Zuhörers zu übersetzen <br /><strong>2. Flüsterdolmetschen</strong> ist eine
-				Technik des Dolmetschens, bei der der Dolmetscher in das Ohr des Zuhörers flüstert. <br /><strong>3.
-				Simultandolmetschen (Konferenzdolmetschen)</strong> ist eine Technik, bei welcher Redebeiträge „fast in Echtzeit“
-				übertragen werden.
+				beendet hat, um dann diesen in die Sprache des Zuhörers zu übersetzen</li><li><strong>Flüsterdolmetschen</strong> ist eine
+				Technik des Dolmetschens, bei der der Dolmetscher in das Ohr des Zuhörers flüstert. </li><li><strong>Simultandolmetschen (Konferenzdolmetschen)</strong> ist eine Technik, bei welcher Redebeiträge „fast in Echtzeit“
+				übertragen werden.</li></ol>
 			</span>
 		),
 	},
