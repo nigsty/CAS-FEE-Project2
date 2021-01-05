@@ -55,12 +55,12 @@ const useStyles = makeStyles((theme) => ({
 		paddingLeft: '0',
 	},
 	logoContainer: {
-		paddingLeft: '4em',
+		marginLeft: '4em',
 		[theme.breakpoints.down('md')]: {
-			paddingLeft: '1em',
+			marginLeft: '1em',
 		},
 		'&hover': {
-			backgroundColor: 'transparent',
+			backgroundColor: 'red',
 		},
 	},
 	tabContainer: {
