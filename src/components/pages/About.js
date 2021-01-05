@@ -35,7 +35,7 @@ const aboutMeBody = (
 		Mein Name ist <strong>Nigsty Equbamichael Abreha</strong>. Im Jahre 1998 kam ich aus meinem Heimatland 
 		<strong> Äthiopien</strong>, in dem ich geboren und aufgewachsen bin, in die <strong>Schweiz</strong>. Meine Muttersprachen sind{' '}
 		<strong>Tigrinya und Amharisch</strong>. Ich bin Mutter einer 14-jährigen Tochter, welche Schülerin einer
-		Sekundarschule ist. Ich bin als Frontend Web-Entwicklerin tätig. Weiterhin erhielt ich das{' '}
+		Sekundarschule ist. Ich bin im Bereich Web-Entwicklung als Frontend tätig. Weiterhin erhielt ich das{' '}
 		<strong>Zertifikat Interpret</strong> zum interkulturellen Dolmetschen, was mich dazu befähigte von 2010 bis
 		2019 als <strong>interkulturelle Dolmetscherin vor Ort</strong> bei <strong>KOMIN</strong>, sowie als <strong>Femmes-Tische Moderatorin</strong>,
 		zu arbeiten. Seit März 2019 bin ich nun bei <strong>HEKS</strong> als <strong>interkulturelle Telefondolmetscherin</strong> bei

@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
 	button: {
 		borderRadius: '50px',
 		marginLeft: '50px',
-		marginRight: '25px',
+		marginRight: '4em',
 		fontFamily: 'Titillium Web',
 		fontWeight: 500,
 		fontSize: '1rem',
