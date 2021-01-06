@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import { Helmet } from 'react-helmet';
 
 import ReviewsList from '../ReviewsList';
-import FormError from '../FormError';
+import {FormSuccess, FormError}  from '../FormAlert';
 import { auth, getReviews, addReview } from '../../services/Firebase';
 
 import messages from '../messages';
@@ -52,6 +52,7 @@ function Reviews() {
 	const [nameAndInstitution, setNameAndInstitution] = useState('');
 	//const [reviewedDate, setReviewedDate] = useState(new Date());
 	const [errorMessage, setErrorMessage] = useState(null);
+	const [successMessage, setSuccessMessage] = useState(null);
 
 	const [reviews, setReviews] = useState(null); // [] array
 
@@ -81,8 +82,11 @@ function Reviews() {
 			uid: auth.currentUser ? auth.currentUser.uid : '',
 		};
 		if (!tempReview.review || !tempReview.nameAndInstitution) {
-			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus');
+			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
 			return;
+		} else if (tempReview.review && tempReview.nameAndInstitution){
+			setErrorMessage(null);
+			setSuccessMessage(messages['thank-you-review'] || 'Danke!');
 		} else {
 			setErrorMessage(null);
 		}
@@ -136,6 +140,7 @@ function Reviews() {
 					</Typography>
 					<form className={classes.form} noValidate onSubmit={handleSubmit}>
 						{errorMessage !== null ? <FormError theMessage={errorMessage} /> : null}
+						{successMessage !== null ? <FormSuccess theMessage={successMessage} /> : null}
 						<TextField
 							variant="outlined"
 							margin="normal"

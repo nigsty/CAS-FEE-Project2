@@ -15,7 +15,7 @@ import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { signUpUser } from '../services/Firebase';
 
-import FormError from './FormError';
+import { FormError } from './FormAlert';
 import messages from './messages';
 
 const useStyles = makeStyles((theme) => ({

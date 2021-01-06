@@ -12,7 +12,7 @@ import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router';
 
 import { passwordReset} from '../services/Firebase';
-import FormError from './FormError';
+import { FormError } from './FormAlert';
 
 import messages from './messages';
 

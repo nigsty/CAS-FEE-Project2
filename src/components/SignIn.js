@@ -9,7 +9,7 @@ import { Typography, makeStyles, Container, Grid, Link } from '@material-ui/core
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 import { signInUser } from '../services/Firebase';
-import FormError from './FormError';
+import { FormError } from './FormAlert';
 
 import messages from './messages';
 

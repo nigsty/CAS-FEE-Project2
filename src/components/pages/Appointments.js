@@ -15,7 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import FormError from '../FormError';
+import { FormError, FormSuccess } from '../FormAlert';
 import AppointmentsList from '../AppointmentsList';
 import messages from '../messages';
 
@@ -60,6 +60,7 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 	const [institution, setInstitution] = useState('');
 	const [aptDateTime, setAptDateTime] = useState(new Date());
 	const [errorMessage, setErrorMessage] = useState(null);
+	const [successMessage, setSuccessMessage] = useState(null);
 
 	//const loadAllMemo = useCallback(loadAll);
 
@@ -99,8 +100,11 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 			uid: auth.currentUser.uid,
 		};
 		if (!tempApt.thema || !tempApt.institution || !tempApt.aptDateTime) {
-			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus');
+			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
 			return;
+		} else if (tempApt.thema && tempApt.institution && tempApt.aptDateTime){
+			setErrorMessage(null);
+			setSuccessMessage(messages['thank-you-appointment'] || 'Danke!');
 		} else {
 			setErrorMessage(null);
 		}
@@ -128,7 +132,7 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 		}
 	};
 
-	const setFormEditAppointment = (e, item) => {;
+	const setFormEditAppointment = (e, item) => {
 		setId(item.id);
 		setThema(item.thema);
 		setInstitution(item.institution);
@@ -139,11 +143,12 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 			<Container component="main" maxWidth="xs">
 				<CssBaseline />
 				<div className={classes.paper}>
-					<Typography component="h1" variant="h5">					
+					<Typography component="h1" variant="h5">
 						Termin vereinbaren
 					</Typography>
 					<form className={classes.form} noValidate onSubmit={handleSubmit}>
 						{errorMessage !== null ? <FormError theMessage={errorMessage} /> : null}
+						{successMessage !== null ? <FormSuccess theMessage={successMessage} /> : null}
 						<TextField
 							variant="outlined"
 							margin="normal"
