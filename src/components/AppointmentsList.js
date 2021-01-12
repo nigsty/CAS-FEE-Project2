@@ -16,10 +16,7 @@ const AppointmentsList = ({ appointments, editAppointment, handleDelete }) => {
         <TableRow key={item.id}>					
           <TableCell align="left">{item.thema}</TableCell>
           <TableCell align="left">{item.institution}</TableCell>          
-          <TableCell align="left" style={{whiteSpace: 'nowrap'}}>{date.getDate()}. {date.getMonth()+1}. {date.getFullYear()} {date.getHours()}:{`${date.getMinutes()}`.padStart(2, '0')} </TableCell>          
-          {/* <TableCell align="left">
-            <Moment date = {date} format="DD.MM.YYYY HH:mm"/> 
-          </TableCell> */}
+          <TableCell align="left" style={{whiteSpace: 'nowrap'}}>{date.getDate()}. {date.getMonth()+1}. {date.getFullYear()} {date.getHours()}:{`${date.getMinutes()}`.padStart(2, '0')} </TableCell>
           <TableCell align="left">
             <Button 
               title="Termin bearbeiten"

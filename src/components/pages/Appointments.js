@@ -62,8 +62,6 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 	const [errorMessage, setErrorMessage] = useState(null);
 	const [successMessage, setSuccessMessage] = useState(null);
 
-	//const loadAllMemo = useCallback(loadAll);
-
 	const classes = useStyles();
 
 	useEffect(() => {
