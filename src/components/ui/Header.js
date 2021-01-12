@@ -167,9 +167,9 @@ export default function Header(props) {
 			activeIndex: 0,
 		},
 		{ name: 'Telefondolmetschen', link: '/interpreting', activeIndex: 1 },
-		{ name: 'Kundenbewertungen', link: '/reviews', activeIndex: 2 },
-		{ name: 'FAQ', link: '/faq', activeIndex: 3 },
-		{ name: 'Über mich', link: '/about', activeIndex: 4 },
+		{ name: 'FAQ', link: '/faq', activeIndex: 2 },
+		{ name: 'Über mich', link: '/about', activeIndex: 3 },		
+		{ name: 'Kundenbewertungen', link: '/reviews', activeIndex: 4 },
 	];
 
 	const tabs = (
