@@ -6,5 +6,6 @@ export default {
   "auth/argument-error": "E-mail muss eine gültige Zeichenfolge sein.",
   "auth/user-not-found": "Es gibt keinen Benutzerdatensatz, der dieser Kennung entspricht. Der Benutzer wurde möglicherweise gelöscht.",
   "thank-you-review": "Danke, ich schätze Ihre Meinung!",
-  "thank-you-appointment": "Danke, für Ihre Vereinbarung!"
+  "thank-you-appointment": "Danke, für Ihre Vereinbarung!",
+  "thank-you-appointment-edit": "Your changes are saved!"
 }

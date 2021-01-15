@@ -99,10 +99,16 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 		};
 		if (!tempApt.thema || !tempApt.institution || !tempApt.aptDateTime) {
 			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
+			window.setTimeout(()=>setErrorMessage(null), 2000);
 			return;
-		} else if (tempApt.thema && tempApt.institution && tempApt.aptDateTime){
+		} else if (tempApt.thema && tempApt.institution && tempApt.aptDateTime) {
 			setErrorMessage(null);
-			setSuccessMessage(messages['thank-you-appointment'] || 'Danke!');
+			if(id){
+				setSuccessMessage(messages['thank-you-appointment-edit'] || 'Danke! edited');
+			} else {
+				setSuccessMessage(messages['thank-you-appointment'] || 'Danke! created');
+			}
+			window.setTimeout(()=>setSuccessMessage(null), 2000);
 		} else {
 			setErrorMessage(null);
 		}
@@ -112,6 +118,9 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 			if (tempApt.id) {
 				// EDIT EXISTING APT
 				newDocRef = await editAppointment(tempApt);
+				setId('');
+				setThema('');
+				setInstitution('');
 			} else {
 				newDocRef = await addAppointment(tempApt);
 			}
@@ -173,7 +182,6 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 							onChange={handleChange}
 						/>
 						<DateTimePicker
-							//disableToolbar
 							variant="dialog"
 							margin="normal"
 							required
@@ -181,13 +189,12 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 							ampm={false}
 							name="aptDateTime"
 							id="datetime-local"
-							// format="dd/mm/yyyy hh:mm"
 							label="Nächster Termin"
 							value={aptDateTime}
 							onChange={handleDateChange}
 						/>
 						<Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-							{id ? `Änderungen speichern` : `Einen Termin vereinbaren`}
+							{id ? `Save changes` : `make new appointment`}
 						</Button>
 					</form>
 				</div>
