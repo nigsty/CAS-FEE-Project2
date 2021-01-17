@@ -160,5 +160,4 @@ const SignUp = ({ registerUser, user }) => {
 		</Container>
 	);
 };
-
 export default SignUp;

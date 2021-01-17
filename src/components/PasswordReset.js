@@ -110,8 +110,7 @@ function PasswordReset() {
 				</form>
 			</div>
 		</Container>
-	);
-	
+	);	
 }
 
 export default PasswordReset;

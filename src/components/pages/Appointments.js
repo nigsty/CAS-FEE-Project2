@@ -22,6 +22,7 @@ import messages from '../messages';
 import deLocale from 'date-fns/locale/de';
 import DateFnsUtils from '@date-io/date-fns';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -98,17 +99,16 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 			uid: auth.currentUser.uid,
 		};
 		if (!tempApt.thema || !tempApt.institution || !tempApt.aptDateTime) {
-			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
-			window.setTimeout(()=>setErrorMessage(null), 2000);
+			toast.error(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
 			return;
 		} else if (tempApt.thema && tempApt.institution && tempApt.aptDateTime) {
 			setErrorMessage(null);
-			if(id){
-				setSuccessMessage(messages['thank-you-appointment-edit'] || 'Danke! edited');
+			if (id) {
+				toast.success(messages['thank-you-appointment-edit'] || 'Danke! edited');
 			} else {
-				setSuccessMessage(messages['thank-you-appointment'] || 'Danke! created');
+				toast.success(messages['thank-you-appointment'] || 'Ihre Änderungen sind gespeichert!');
 			}
-			window.setTimeout(()=>setSuccessMessage(null), 2000);
+			window.setTimeout(() => setSuccessMessage(null), 2000);
 		} else {
 			setErrorMessage(null);
 		}
@@ -194,7 +194,7 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 							onChange={handleDateChange}
 						/>
 						<Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-							{id ? `Save changes` : `make new appointment`}
+							{id ? `Termin vereinbaren` : `Änderungen speichern`}
 						</Button>
 					</form>
 				</div>
@@ -254,5 +254,4 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 		</MuiPickersUtilsProvider>
 	);
 };
-
 export default Appointments;

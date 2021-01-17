@@ -7,5 +7,5 @@ export default {
   "auth/user-not-found": "Es gibt keinen Benutzerdatensatz, der dieser Kennung entspricht. Der Benutzer wurde möglicherweise gelöscht.",
   "thank-you-review": "Danke, ich schätze Ihre Meinung!",
   "thank-you-appointment": "Danke, für Ihre Vereinbarung!",
-  "thank-you-appointment-edit": "Your changes are saved!"
+  "thank-you-appointment-edit": "Ihre Änderungen sind gespeichert!"
 }

@@ -51,10 +51,6 @@ const theme = createMuiTheme({
 theme.props = {
 	MuiButton: {
 		disableElevation: true,
-		//textTransform: 'none',
-	},
-	MuiInputLabel: {
-		//shrink: true
 	},
 	MuiInput: {
 		//disableUnderline: true,
@@ -91,7 +87,6 @@ theme.overrides = {
 	},
 	MuiInputLabel: {
 		root: {
-			//textTransform: 'none',
 			fontSize: '1.5rem',
 		},
 	},

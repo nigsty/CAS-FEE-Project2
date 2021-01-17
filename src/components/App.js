@@ -24,12 +24,15 @@ import PasswordReset from './PasswordReset';
 import Header from './ui/Header';
 import Footer from './ui/Footer';
 import MobileFooter from './ui/MobileFooter';
+import 'react-toastify/dist/ReactToastify.css';
 import '../css/App.css';
 import theme from '../components/ui/Theme';
+import { ToastContainer, toast } from 'react-toastify';
 
+
+toast.configure();
 const App = (props) => {
 	const [user, setUser] = useState(null);
-	//const [displayName, setDisplayName] = useState(null);
 	const [userID, setUserID] = useState(null);
 	const [appointments, setAppointments] = useState([]);
 	const [admin, setAdmin] = useState(false);
@@ -47,7 +50,6 @@ const App = (props) => {
 		return onAuthStateChanged(async (FBUser) => {
 			if (FBUser) {
 				setUser(FBUser);
-				//setDisplayName(FBUser.displayName);
 				setUserID(FBUser.uid);
 
 				await readAppointments();
@@ -67,7 +69,6 @@ const App = (props) => {
 	const handleLogOut = async (e) => {
 		e.preventDefault();
 		await logOutUser();
-		//setDisplayName(null);
 		setUserID(null);
 		setUser(null);
 
@@ -126,8 +127,8 @@ const App = (props) => {
 				<Footer />
 				<MobileFooter user={user} handleLogOut={handleLogOut} />
 			</ThemeProvider>
+			<ToastContainer />
 		</div>
 	);
 };
-
 export default App;

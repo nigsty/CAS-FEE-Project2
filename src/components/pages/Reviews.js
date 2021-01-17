@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { toast } from 'react-toastify';
 
 import { Helmet } from 'react-helmet';
 
@@ -74,7 +75,6 @@ function Reviews() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		let tempReview = {
-			//id: id,
 			review: review,
 			reviewedDate: new Date(), // reviewedDate,
 			nameAndInstitution: nameAndInstitution,
@@ -82,11 +82,12 @@ function Reviews() {
 			uid: auth.currentUser ? auth.currentUser.uid : '',
 		};
 		if (!tempReview.review || !tempReview.nameAndInstitution) {
-			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
+			toast.error(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
 			return;
 		} else if (tempReview.review && tempReview.nameAndInstitution){
 			setErrorMessage(null);
-			setSuccessMessage(messages['thank-you-review'] || 'Danke!');
+			toast.success(messages['thank-you-review'] || 'Danke, ich schätze Ihre Meinung!');
+			window.setTimeout(() => setSuccessMessage(null), 2000);
 		} else {
 			setErrorMessage(null);
 		}
@@ -198,5 +199,4 @@ function Reviews() {
 		</>
 	);
 }
-
 export default Reviews;

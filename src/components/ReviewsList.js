@@ -68,5 +68,4 @@ const ReviewsList = ({ reviews }) => {
 		);
 	});
 };
-
 export default ReviewsList;

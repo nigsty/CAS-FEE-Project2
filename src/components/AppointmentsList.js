@@ -6,9 +6,6 @@ import Button from '@material-ui/core/Button';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-//import Moment from 'react-moment';
-//import 'moment/locale/de';
-
 const AppointmentsList = ({ appointments, editAppointment, handleDelete }) => {
     return appointments.map((item) => {
       const date = new Date(item.aptDateTime.seconds*1000);

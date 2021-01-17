@@ -62,5 +62,4 @@ function FourOhFour() {
 		</div>
 	);
 }
-
 export default FourOhFour;

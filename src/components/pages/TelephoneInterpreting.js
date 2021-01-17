@@ -47,7 +47,7 @@ const InterpretBody = () => {
 					</a>
 					, woraufhin man zur Terminvereinbarung weitergeleitet wird.
 				</li>
-				<li>Am vereinbarten Termin wählen Sie die folgende Telefonnummer: 07X XXX XX XX.</li>{' '}
+				<li>Am vereinbarten Termin wählen Sie die folgende Telefonnummer: 078 845 69 03.</li>{' '}
 				<li>
 					Voraussetzung ist, dass Sie sich am selben Ort wie Ihr Gesprächspartner, mit dem Sie sich
 					verständigen möchten, befinden. Nun erklären Sie Ihre Ausgangssituation sowie das Gesprächsziel.
