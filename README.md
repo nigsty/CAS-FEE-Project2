@@ -45,4 +45,4 @@
 
 -   "npm install"
 -   "npm start"
--   Die Webseite ist unter [http://localhost:3000/](http://localhost:3000/){:target="_blank"} oder auf dem Web (Firebase deploy) unter <a href="https://habescha-fee.web.app" target="_blank" rel="noopener">Habescha's Web Page</a>  https://habescha-fee.web.app erreichbar.
+-   Die Webseite ist unter [http://localhost:3000/]{:target="_blank"}(http://localhost:3000/){:target="_blank"} oder auf dem Web (Firebase deploy) unter <a href="https://habescha-fee.web.app" target="_blank" rel="noopener">Habescha's Web Page</a>  https://habescha-fee.web.app erreichbar.
