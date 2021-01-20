@@ -22,7 +22,6 @@ import messages from '../messages';
 import deLocale from 'date-fns/locale/de';
 import DateFnsUtils from '@date-io/date-fns';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -99,14 +98,15 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 			uid: auth.currentUser.uid,
 		};
 		if (!tempApt.thema || !tempApt.institution || !tempApt.aptDateTime) {
-			toast.error(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
+			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
+			window.setTimeout(()=>setErrorMessage(null), 2000);
 			return;
 		} else if (tempApt.thema && tempApt.institution && tempApt.aptDateTime) {
 			setErrorMessage(null);
 			if (id) {
-				toast.success(messages['thank-you-appointment-edit'] || 'Danke! edited');
+				setSuccessMessage(messages['thank-you-appointment-edit'] || 'Danke! edited');
 			} else {
-				toast.success(messages['thank-you-appointment'] || 'Ihre Änderungen sind gespeichert!');
+				setSuccessMessage(messages['thank-you-appointment'] || 'Ihre Änderungen sind gespeichert!');
 			}
 			window.setTimeout(() => setSuccessMessage(null), 2000);
 		} else {

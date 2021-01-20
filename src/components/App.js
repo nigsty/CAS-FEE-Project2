@@ -24,13 +24,10 @@ import PasswordReset from './PasswordReset';
 import Header from './ui/Header';
 import Footer from './ui/Footer';
 import MobileFooter from './ui/MobileFooter';
-import 'react-toastify/dist/ReactToastify.css';
 import '../css/App.css';
 import theme from '../components/ui/Theme';
-import { ToastContainer, toast } from 'react-toastify';
 
 
-toast.configure();
 const App = (props) => {
 	const [user, setUser] = useState(null);
 	const [userID, setUserID] = useState(null);
@@ -127,7 +124,6 @@ const App = (props) => {
 				<Footer />
 				<MobileFooter user={user} handleLogOut={handleLogOut} />
 			</ThemeProvider>
-			<ToastContainer />
 		</div>
 	);
 };

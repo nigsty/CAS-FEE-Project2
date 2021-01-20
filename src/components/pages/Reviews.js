@@ -6,7 +6,6 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { toast } from 'react-toastify';
 
 import { Helmet } from 'react-helmet';
 
@@ -82,11 +81,12 @@ function Reviews() {
 			uid: auth.currentUser ? auth.currentUser.uid : '',
 		};
 		if (!tempReview.review || !tempReview.nameAndInstitution) {
-			toast.error(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
+			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
+			window.setTimeout(()=>setErrorMessage(null), 2000);
 			return;
 		} else if (tempReview.review && tempReview.nameAndInstitution){
 			setErrorMessage(null);
-			toast.success(messages['thank-you-review'] || 'Danke, ich schätze Ihre Meinung!');
+			setSuccessMessage(messages['thank-you-review'] || 'Danke, ich schätze Ihre Meinung!');
 			window.setTimeout(() => setSuccessMessage(null), 2000);
 		} else {
 			setErrorMessage(null);
@@ -178,7 +178,7 @@ function Reviews() {
 			</Container>
 			<Grid container>
 				<Grid item lg={2} />
-				<Grid item xs={12} md={12} lg={8} className={classes.tablePadding}>
+				<Grid item xs={12} lg={8} className={classes.tablePadding}>
 					<Grid container>
 						<Grid item xs={12}>
 							{reviews && reviews.length ? (
