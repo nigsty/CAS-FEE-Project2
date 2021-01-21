@@ -1,15 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { ThemeProvider } from '@material-ui/core';
 import { Route, Switch } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import {
-	logOutUser,
-	getAppointments,
-	deleteAppointment,
-	getReviews,
-	onAuthStateChanged,
-	auth,
-} from '../services/Firebase';
+import { logOutUser, getAppointments, deleteAppointment, auth } from '../services/Firebase';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -27,12 +20,10 @@ import MobileFooter from './ui/MobileFooter';
 import '../css/App.css';
 import theme from '../components/ui/Theme';
 
-
 const App = (props) => {
-	const [user, setUser] = useState(null);
-	const [userID, setUserID] = useState(null);
 	const [appointments, setAppointments] = useState([]);
 	const [admin, setAdmin] = useState(false);
+
 	let history = useHistory();
 
 	const readAppointments = useCallback(async () => {
@@ -43,21 +34,6 @@ const App = (props) => {
 		setAppointments(appointments);
 	}, [admin]);
 
-	useEffect(() => {
-		return onAuthStateChanged(async (FBUser) => {
-			if (FBUser) {
-				setUser(FBUser);
-				setUserID(FBUser.uid);
-
-				await readAppointments();
-
-				await getReviews();
-			} else {
-				setUser(null);
-			}
-		});
-	}, [readAppointments]);
-
 	const loadAll = () => {
 		setAdmin(true);
 		readAppointments();
@@ -66,9 +42,7 @@ const App = (props) => {
 	const handleLogOut = async (e) => {
 		e.preventDefault();
 		await logOutUser();
-		setUserID(null);
-		setUser(null);
-
+		
 		history.push('/');
 	};
 
@@ -89,10 +63,10 @@ const App = (props) => {
 	return (
 		<div className="layout-container">
 			<ThemeProvider theme={theme}>
-				<Header user={user} handleLogOut={handleLogOut} />
+				<Header handleLogOut={handleLogOut} />
 				<div className="layout-content">
 					<Switch>
-						<Route exact path="/" component={() => <Home user={user} />} />
+						<Route exact path="/" component={Home} />
 						<Route path="/about" component={About} />
 						<Route path="/interpreting" component={TelephoneInterpreting} />
 						<Route path="/faq" component={Faq} />
@@ -104,7 +78,6 @@ const App = (props) => {
 									<Appointments
 										appointments={appointments}
 										readAppointments={readAppointments}
-										userID={userID}
 										handleDelete={handleDelete}
 										match={match}
 										loadAll={loadAll}
@@ -116,13 +89,13 @@ const App = (props) => {
 						<Route path="/signin" component={SignIn} />
 						<Route path="/password-reset" component={PasswordReset} />
 						<Route path="/signup">
-							<SignUp user={user} />
+							<SignUp />
 						</Route>
 						<Route component={FourOhFour} />
 					</Switch>
 				</div>
 				<Footer />
-				<MobileFooter user={user} handleLogOut={handleLogOut} />
+				<MobileFooter handleLogOut={handleLogOut} />
 			</ThemeProvider>
 		</div>
 	);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
@@ -18,6 +18,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import logo from '../../assets/habescha-web-interpret-logo.svg';
 import hamburger from '../../assets/hamburger.svg';
 import addAppointment from '../../assets/add-appointment.png';
+import { AuthContext } from '../../services/Firebase';
 
 function ElevationScroll(props) {
 	const { children } = props;
@@ -104,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
 	drawerItem: {
 		...theme.typography.tab,
 		color: theme.palette.common.green,
-		opacity: 0.8
+		opacity: 0.8,
 	},
 	drawerItemSelected: {
 		backgroundColor: `rgba(241, 104, 36, .09) !important`,
@@ -123,11 +124,11 @@ const useStyles = makeStyles((theme) => ({
 	testClasse: {
 		backgroundColor: theme.palette.common.red,
 	},
-
 }));
 
 export default function Header(props) {
 	const classes = useStyles();
+	const user = useContext(AuthContext);
 	const theme = useTheme();
 	const location = useLocation();
 	const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -136,7 +137,7 @@ export default function Header(props) {
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [value, setValue] = useState(0);
 
-	const { user, handleLogOut } = props;
+	const { handleLogOut } = props;
 
 	const handleChange = (e, value) => {
 		setValue(value);
@@ -158,7 +159,7 @@ export default function Header(props) {
 						height="25"
 						alt="add appointment icon"
 						src={addAppointment}
-						style={{verticalAlign: 'bottom'}}
+						style={{ verticalAlign: 'bottom' }}
 					/>{' '}
 					Termin
 				</span>
@@ -168,7 +169,7 @@ export default function Header(props) {
 		},
 		{ name: 'Telefondolmetschen', link: '/interpreting', activeIndex: 1 },
 		{ name: 'FAQ', link: '/faq', activeIndex: 2 },
-		{ name: 'Über mich', link: '/about', activeIndex: 3 },		
+		{ name: 'Über mich', link: '/about', activeIndex: 3 },
 		{ name: 'Kundenbewertungen', link: '/reviews', activeIndex: 4 },
 	];
 
@@ -228,7 +229,7 @@ export default function Header(props) {
 							component={Link}
 							to={route.link}
 							selected={value === route.activeIndex}
-							classes={{ selected: classes.drawerItemSelected}}
+							classes={{ selected: classes.drawerItemSelected }}
 							className={classes.drawerItemHover}
 							onClick={() => {
 								setOpenDrawer(false);

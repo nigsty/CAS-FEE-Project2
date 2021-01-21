@@ -1,3 +1,4 @@
+import React, { useState, useEffect, createContext } from 'react'
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/firestore';
@@ -22,6 +23,15 @@ export const auth = firebase.auth();
 
 export const onAuthStateChanged = (cb) => {
 	firebase.auth().onAuthStateChanged(cb);
+};
+
+export const AuthContext = createContext(null);
+
+export const Auth = ({ children }) => {
+	const [user, setUser] = useState(null);
+	const onAuthStateChanged = (user) => setUser(user);
+	useEffect(() => auth.onAuthStateChanged(onAuthStateChanged));
+	return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 };
 
 export const getAppointments = async ({ all }) => {

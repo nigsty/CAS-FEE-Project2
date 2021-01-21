@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {
 	makeStyles,
@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { signUpUser } from '../services/Firebase';
+import { AuthContext, signUpUser } from '../services/Firebase';
 
 import { FormError } from './FormAlert';
 import messages from './messages';
@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const SignUp = ({ registerUser, user }) => {
+const SignUp = ({ registerUser }) => {
+	const user = useContext(AuthContext);
 	const [displayName, setDisplayName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');

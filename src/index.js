@@ -7,6 +7,7 @@ import './style.css';
 import App from './components/App';
 import WebFont from 'webfontloader';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Auth } from './services/Firebase';
 
 WebFont.load({
 	google: {
@@ -16,7 +17,9 @@ WebFont.load({
 ReactDOM.render(
 	<React.StrictMode>
 		<Router>
-			<App />
+			<Auth>
+				<App />
+			</Auth>
 		</Router>
 	</React.StrictMode>,
 	document.getElementById('root')

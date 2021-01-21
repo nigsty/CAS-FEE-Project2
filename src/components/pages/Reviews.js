@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
 
 import Grid from '@material-ui/core/Grid';
@@ -10,8 +10,8 @@ import Button from '@material-ui/core/Button';
 import { Helmet } from 'react-helmet';
 
 import ReviewsList from '../ReviewsList';
-import {FormSuccess, FormError}  from '../FormAlert';
-import { auth, getReviews, addReview } from '../../services/Firebase';
+import { FormSuccess, FormError } from '../FormAlert';
+import { auth, getReviews, addReview, AuthContext } from '../../services/Firebase';
 
 import messages from '../messages';
 
@@ -47,10 +47,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Reviews() {
-	//const [id, setId] = useState('');
+	const user = useContext(AuthContext);
 	const [review, setReview] = useState('');
 	const [nameAndInstitution, setNameAndInstitution] = useState('');
-	//const [reviewedDate, setReviewedDate] = useState(new Date());
 	const [errorMessage, setErrorMessage] = useState(null);
 	const [successMessage, setSuccessMessage] = useState(null);
 
@@ -75,16 +74,16 @@ function Reviews() {
 		e.preventDefault();
 		let tempReview = {
 			review: review,
-			reviewedDate: new Date(), // reviewedDate,
+			reviewedDate: new Date(),
 			nameAndInstitution: nameAndInstitution,
 			email: auth.currentUser ? auth.currentUser.email : '',
 			uid: auth.currentUser ? auth.currentUser.uid : '',
 		};
 		if (!tempReview.review || !tempReview.nameAndInstitution) {
 			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
-			window.setTimeout(()=>setErrorMessage(null), 2000);
+			window.setTimeout(() => setErrorMessage(null), 2000);
 			return;
-		} else if (tempReview.review && tempReview.nameAndInstitution){
+		} else if (tempReview.review && tempReview.nameAndInstitution) {
 			setErrorMessage(null);
 			setSuccessMessage(messages['thank-you-review'] || 'Danke, ich schätze Ihre Meinung!');
 			window.setTimeout(() => setSuccessMessage(null), 2000);
@@ -135,46 +134,55 @@ function Reviews() {
 			</Helmet>
 			<Container component="main" maxWidth="xs">
 				<CssBaseline />
-				<div className={classes.paper}>
-					<Typography component="h1" variant="h5">
-						Rezesion schreiben
-					</Typography>
-					<form className={classes.form} noValidate onSubmit={handleSubmit}>
-						{errorMessage !== null ? <FormError theMessage={errorMessage} /> : null}
-						{successMessage !== null ? <FormSuccess theMessage={successMessage} /> : null}
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							id="review"
-							label="Ihre Bewertung..."
-							name="review"
-							autoComplete="thema"
-							autoFocus
-							multiline
-							rows={3}
-							rowsMax={10}
-							value={review}
-							onChange={handleChange}
-						/>
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							id="nameAndInstitution"
-							label="Name & Institution"
-							name="nameAndInstitution"
-							autoComplete="institution"
-							value={nameAndInstitution}
-							onChange={handleChange}
-						/>
-						<Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-							Senden
-						</Button>
-					</form>
-				</div>
+				{user ? (
+					<div className={classes.paper}>
+						<Typography component="h1" variant="h5">
+							Rezesion schreiben
+						</Typography>
+
+						<form className={classes.form} noValidate onSubmit={handleSubmit}>
+							{errorMessage !== null ? <FormError theMessage={errorMessage} /> : null}
+							{successMessage !== null ? <FormSuccess theMessage={successMessage} /> : null}
+							<TextField
+								variant="outlined"
+								margin="normal"
+								required
+								fullWidth
+								id="review"
+								label="Ihre Bewertung..."
+								name="review"
+								autoComplete="thema"
+								autoFocus
+								multiline
+								rows={3}
+								rowsMax={10}
+								value={review}
+								onChange={handleChange}
+							/>
+							<TextField
+								variant="outlined"
+								margin="normal"
+								required
+								fullWidth
+								id="nameAndInstitution"
+								label="Name & Institution"
+								name="nameAndInstitution"
+								autoComplete="institution"
+								value={nameAndInstitution}
+								onChange={handleChange}
+							/>
+							<Button
+								type="submit"
+								fullWidth
+								variant="contained"
+								color="primary"
+								className={classes.submit}
+							>
+								Senden
+							</Button>
+						</form>
+					</div>
+				) : null}
 			</Container>
 			<Grid container>
 				<Grid item lg={2} />

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { auth, addAppointment, editAppointment } from '../../services/Firebase';
+import React, { useState, useEffect, useContext } from 'react';
+import { auth, addAppointment, editAppointment, AuthContext } from '../../services/Firebase';
 
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -61,8 +61,18 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 	const [aptDateTime, setAptDateTime] = useState(new Date());
 	const [errorMessage, setErrorMessage] = useState(null);
 	const [successMessage, setSuccessMessage] = useState(null);
+	const user = useContext(AuthContext);
 
 	const classes = useStyles();
+
+	useEffect(() => {
+		if (user) {
+			(async () => {
+				await readAppointments();
+				//await getReviews();
+			})();
+		}
+	}, [user, readAppointments]);
 
 	useEffect(() => {
 		//console.log('[Appointments] listAll:', match.params.listAll === 'all');
@@ -99,7 +109,7 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 		};
 		if (!tempApt.thema || !tempApt.institution || !tempApt.aptDateTime) {
 			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
-			window.setTimeout(()=>setErrorMessage(null), 2000);
+			window.setTimeout(() => setErrorMessage(null), 2000);
 			return;
 		} else if (tempApt.thema && tempApt.institution && tempApt.aptDateTime) {
 			setErrorMessage(null);
@@ -182,6 +192,7 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 							onChange={handleChange}
 						/>
 						<DateTimePicker
+							disablePast
 							variant="dialog"
 							margin="normal"
 							required
@@ -194,7 +205,7 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 							onChange={handleDateChange}
 						/>
 						<Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-							{id ? `Termin vereinbaren` : `Änderungen speichern`}
+							{id ? `Änderungen speichern` : `Termin vereinbaren`}
 						</Button>
 					</form>
 				</div>

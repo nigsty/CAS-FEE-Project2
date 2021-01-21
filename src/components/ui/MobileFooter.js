@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
+import { AuthContext } from '../../services/Firebase';
 
 const useStyles = makeStyles((theme) => ({
-	root: {		
+	root: {
 		fontWeight: 500,
 		fontSize: '1rem',
 	},
@@ -24,20 +25,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MobileFooter(props) {
 	const classes = useStyles();
+	const user = useContext(AuthContext);
 
-	const { user, handleLogOut } = props;
+	const { handleLogOut } = props;
 	return (
 		<footer className={classes.mobileFooter}>
 			<Grid container direction="column" justify="center" alignItems="center">
 				<Grid item>
 					{user ? (
-						<Button 
+						<Button
 							variant="contained"
 							color="secondary"
 							onClick={handleLogOut}
 							className={classes.root}
 							startIcon={<AccountCircleIcon />}
-							>
+						>
 							Logout
 						</Button>
 					) : (
