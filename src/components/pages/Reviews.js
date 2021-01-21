@@ -12,8 +12,8 @@ import { Helmet } from 'react-helmet';
 import ReviewsList from '../ReviewsList';
 import { FormSuccess, FormError } from '../FormAlert';
 import { auth, getReviews, addReview, AuthContext } from '../../services/Firebase';
-
 import messages from '../messages';
+import { MainContainer, Title } from '../ui/ui-partials';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -118,8 +118,10 @@ function Reviews() {
 		}
 	};
 
+	const reviewHeading = 'Aktuelle Bewertungen';
+
 	return (
-		<>
+		<div className={classes.root}>
 			<Helmet>
 				<title>Habescha: Kundenbewertungen </title>
 				<link rel="canonical" href="http://habescha.ch/reviews" />
@@ -184,27 +186,35 @@ function Reviews() {
 					</div>
 				) : null}
 			</Container>
-			<Grid container>
-				<Grid item lg={2} />
-				<Grid item xs={12} lg={8} className={classes.tablePadding}>
-					<Grid container>
-						<Grid item xs={12}>
+			<MainContainer>
+				<Grid container>
+					<Grid item md={2} />
+					<Grid item xs={12} lg={8}>
+						<Grid container>							
+							{user ? (
+								<Grid item xs={12}>
 							{reviews && reviews.length ? (
 								<Typography variant="h3" color="primary" gutterBottom>
 									Aktuelle Bewertungen
 								</Typography>
 							) : null}
-						</Grid>
+						</Grid> ): 
 						<Grid item xs={12}>
-							<Grid container spacing={2}>
-								{reviews ? <ReviewsList reviews={reviews} /> : null}
+								{reviews && reviews.length ? (
+									<Title>{reviewHeading}</Title>								
+								) : null}
+							</Grid>}
+							<Grid item xs={12}>
+								<Grid container spacing={2}>
+									{reviews ? <ReviewsList reviews={reviews} /> : null}
+								</Grid>
 							</Grid>
 						</Grid>
 					</Grid>
+					<Grid item lg={2} />
 				</Grid>
-				<Grid item lg={2} />
-			</Grid>
-		</>
+			</MainContainer>
+		</div>
 	);
 }
 export default Reviews;
