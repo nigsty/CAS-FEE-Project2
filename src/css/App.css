@@ -12,12 +12,3 @@
 	margin-top: 0;
 	margin-bottom: 0;
 }
-.Toastify__toast-container {
-	font-weight: 600;
-}
-.Toastify__toast--error {
-	background:#F16824;
-}
-.Toastify__toast--success {
-	background:#059348;
-}

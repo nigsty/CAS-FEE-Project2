@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import { Helmet } from 'react-helmet';
 
 import ReviewsList from '../ReviewsList';
-import { FormSuccess, FormError } from '../FormAlert';
+import { FormSnackbarMessage } from '../FormAlert';
 import { auth, getReviews, addReview, AuthContext } from '../../services/Firebase';
 import messages from '../messages';
 import { MainContainer, Title } from '../ui/ui-partials';
@@ -50,8 +50,7 @@ function Reviews() {
 	const user = useContext(AuthContext);
 	const [review, setReview] = useState('');
 	const [nameAndInstitution, setNameAndInstitution] = useState('');
-	const [errorMessage, setErrorMessage] = useState(null);
-	const [successMessage, setSuccessMessage] = useState(null);
+	const [SnackbarMessage, setSnackbarMessage] = useState(null); // { type: "success", text: "" }
 
 	const [reviews, setReviews] = useState(null); // [] array
 
@@ -80,15 +79,21 @@ function Reviews() {
 			uid: auth.currentUser ? auth.currentUser.uid : '',
 		};
 		if (!tempReview.review || !tempReview.nameAndInstitution) {
-			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
-			window.setTimeout(() => setErrorMessage(null), 2000);
+			setSnackbarMessage({
+				type: 'error',
+				text: messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.',
+			});
+			window.setTimeout(() => setSnackbarMessage(null), 2000);
 			return;
 		} else if (tempReview.review && tempReview.nameAndInstitution) {
-			setErrorMessage(null);
-			setSuccessMessage(messages['thank-you-review'] || 'Danke, ich schätze Ihre Meinung!');
-			window.setTimeout(() => setSuccessMessage(null), 2000);
+			setSnackbarMessage(null);
+			setSnackbarMessage({
+				type: 'success',
+				text: messages['thank-you-review'] || 'Danke, ich schätze Ihre Meinung!',
+			});
+			window.setTimeout(() => setSnackbarMessage(null), 2000);
 		} else {
-			setErrorMessage(null);
+			setSnackbarMessage(null);
 		}
 
 		let newDocRef;
@@ -143,8 +148,10 @@ function Reviews() {
 						</Typography>
 
 						<form className={classes.form} noValidate onSubmit={handleSubmit}>
-							{errorMessage !== null ? <FormError theMessage={errorMessage} /> : null}
-							{successMessage !== null ? <FormSuccess theMessage={successMessage} /> : null}
+							{SnackbarMessage ? (
+								<FormSnackbarMessage type={SnackbarMessage.type} text={SnackbarMessage.text} />
+							) : null}
+
 							<TextField
 								variant="outlined"
 								margin="normal"
@@ -190,20 +197,20 @@ function Reviews() {
 				<Grid container>
 					<Grid item md={2} />
 					<Grid item xs={12} lg={8}>
-						<Grid container>							
+						<Grid container>
 							{user ? (
 								<Grid item xs={12}>
-							{reviews && reviews.length ? (
-								<Typography variant="h3" color="primary" gutterBottom>
-									Aktuelle Bewertungen
-								</Typography>
-							) : null}
-						</Grid> ): 
-						<Grid item xs={12}>
-								{reviews && reviews.length ? (
-									<Title>{reviewHeading}</Title>								
-								) : null}
-							</Grid>}
+									{reviews && reviews.length ? (
+										<Typography variant="h3" color="primary" gutterBottom>
+											Aktuelle Bewertungen
+										</Typography>
+									) : null}
+								</Grid>
+							) : (
+								<Grid item xs={12}>
+									{reviews && reviews.length ? <Title>{reviewHeading}</Title> : null}
+								</Grid>
+							)}
 							<Grid item xs={12}>
 								<Grid container spacing={2}>
 									{reviews ? <ReviewsList reviews={reviews} /> : null}

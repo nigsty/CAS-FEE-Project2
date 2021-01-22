@@ -9,7 +9,7 @@ import { Typography, makeStyles, Container, Grid, Link } from '@material-ui/core
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 import { signInUser } from '../services/Firebase';
-import { FormError } from './FormAlert';
+import { FormSnackbarMessage } from './FormAlert';
 
 import messages from './messages';
 
@@ -37,7 +37,8 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = (props) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [errorMessage, setErrorMessage] = useState(null);
+	//const [errorMessage, setErrorMessage] = useState(null);
+	const [snackbarMessage, setSnackbarMessage] = useState(null);
 
 	const classes = useStyles();
 	let history = useHistory();
@@ -61,11 +62,13 @@ const SignIn = (props) => {
 		e.preventDefault();
 		try {
 			await signInUser(registrationInfo);
-			setErrorMessage(null);
+			setSnackbarMessage(null);
 			history.push('/appointments');
 		} catch (error) {
-			let errorMessage = messages[error.code] || error.message;
-			setErrorMessage(errorMessage);
+			setSnackbarMessage({ type: 'error', text: messages[error.code] || error.message });
+			window.setTimeout(() => {
+				setSnackbarMessage(null);
+			}, 2000);
 		}
 	};
 
@@ -80,7 +83,7 @@ const SignIn = (props) => {
 					Login
 				</Typography>
 				<form className={classes.form} noValidate onSubmit={handleSubmit}>
-					{errorMessage !== null ? <FormError theMessage={errorMessage} /> : null}
+					{snackbarMessage !== null ? <FormSnackbarMessage type="error" text={snackbarMessage.text} /> : null}
 					<TextField
 						variant="outlined"
 						margin="normal"

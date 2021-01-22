@@ -15,7 +15,7 @@ import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { AuthContext, signUpUser } from '../services/Firebase';
 
-import { FormError } from './FormAlert';
+import { FormSnackbarMessage } from './FormAlert';
 import messages from './messages';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +43,7 @@ const SignUp = ({ registerUser }) => {
 	const [displayName, setDisplayName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [errorMessage, setErrorMessage] = useState(null);
+	const [snackbarMessage, setSnackbarMessage] = useState(null);
 
 	const classes = useStyles();
 	let history = useHistory();
@@ -70,7 +70,10 @@ const SignUp = ({ registerUser }) => {
 		e.preventDefault();
 
 		if (!registrationInfo.displayName) {
-			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus');
+			setSnackbarMessage({ type: 'error', text: messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus' });
+			window.setTimeout(() => {
+				setSnackbarMessage(null);
+			}, 2000);
 			return;
 		}
 
@@ -79,11 +82,10 @@ const SignUp = ({ registerUser }) => {
 			if (typeof registerUser === 'function') {
 				registerUser(registrationInfo.firstName);
 			}
-			setErrorMessage(null);
+			setSnackbarMessage(null);
 			history.push('/');
 		} catch (error) {
-			let errorMessage = messages[error.code] || error.message;
-			setErrorMessage(errorMessage);
+			setSnackbarMessage({ type: 'error', text: messages[error.code] || error.message });
 		}
 	};
 
@@ -101,7 +103,7 @@ const SignUp = ({ registerUser }) => {
 					Registrieren
 				</Typography>
 				<form className={classes.form} noValidate onSubmit={handleSubmit}>
-					{errorMessage !== null ? <FormError theMessage={errorMessage} /> : null}
+					{snackbarMessage ? <FormSnackbarMessage type="error" text={snackbarMessage.text} /> : null}
 					<Grid container spacing={2}>
 						<Grid item xs={12}>
 							<TextField

@@ -15,13 +15,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import { FormError, FormSuccess } from '../FormAlert';
+import { FormSnackbarMessage } from '../FormAlert';
 import AppointmentsList from '../AppointmentsList';
 import messages from '../messages';
 
 import deLocale from 'date-fns/locale/de';
 import DateFnsUtils from '@date-io/date-fns';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -59,8 +60,9 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 	const [thema, setThema] = useState('');
 	const [institution, setInstitution] = useState('');
 	const [aptDateTime, setAptDateTime] = useState(new Date());
-	const [errorMessage, setErrorMessage] = useState(null);
-	const [successMessage, setSuccessMessage] = useState(null);
+
+	const [SnackbarMessage, setSnackbarMessage] = useState(null); // { type: "success", text: "" }
+
 	const user = useContext(AuthContext);
 
 	const classes = useStyles();
@@ -108,19 +110,32 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 			uid: auth.currentUser.uid,
 		};
 		if (!tempApt.thema || !tempApt.institution || !tempApt.aptDateTime) {
-			setErrorMessage(messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.');
-			window.setTimeout(() => setErrorMessage(null), 2000);
+			setSnackbarMessage({
+				type: 'error',
+				text: messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.',
+			});
+			window.setTimeout(() => {
+				setSnackbarMessage(null);
+			}, 2000);
 			return;
 		} else if (tempApt.thema && tempApt.institution && tempApt.aptDateTime) {
-			setErrorMessage(null);
+			setSnackbarMessage(null);
 			if (id) {
-				setSuccessMessage(messages['thank-you-appointment-edit'] || 'Danke! edited');
+				setSnackbarMessage({
+					type: 'success',
+					text: messages['thank-you-appointment-edit'] || 'Danke! edited',
+				});
 			} else {
-				setSuccessMessage(messages['thank-you-appointment'] || 'Ihre Änderungen sind gespeichert!');
+				setSnackbarMessage({
+					type: 'success',
+					text: messages['thank-you-appointment'] || 'Ihre Änderungen sind gespeichert!',
+				});
 			}
-			window.setTimeout(() => setSuccessMessage(null), 2000);
+			window.setTimeout(() => {
+				setSnackbarMessage(null);
+			}, 2000);
 		} else {
-			setErrorMessage(null);
+			setSnackbarMessage(null);
 		}
 
 		let newDocRef;
@@ -155,6 +170,10 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 		setInstitution(item.institution);
 		setAptDateTime(item.aptDateTime.toDate());
 	};
+
+	if (user === null) {
+		return <Redirect to="/" />;
+	}
 	return (
 		<MuiPickersUtilsProvider locale={deLocale} utils={DateFnsUtils}>
 			<Container component="main" maxWidth="xs">
@@ -164,8 +183,10 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 						Termin vereinbaren
 					</Typography>
 					<form className={classes.form} noValidate onSubmit={handleSubmit}>
-						{errorMessage !== null ? <FormError theMessage={errorMessage} /> : null}
-						{successMessage !== null ? <FormSuccess theMessage={successMessage} /> : null}
+						{SnackbarMessage ? (
+							<FormSnackbarMessage type={SnackbarMessage.type} text={SnackbarMessage.text} />
+						) : null}
+
 						<TextField
 							variant="outlined"
 							margin="normal"

@@ -7,12 +7,12 @@ import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {Typography, makeStyles} from '@material-ui/core';
+import { Typography, makeStyles } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router';
 
-import { passwordReset} from '../services/Firebase';
-import { FormError } from './FormAlert';
+import { passwordReset } from '../services/Firebase';
+import { FormSnackbarMessage } from './FormAlert';
 
 import messages from './messages';
 
@@ -38,38 +38,40 @@ const useStyles = makeStyles((theme) => ({
 
 function PasswordReset() {
 	const [email, setEmail] = useState('');
-	const [errorMessage, setErrorMessage] = useState(null);
-	
+	const [SnackbarMessage, setSnackbarMessage] = useState(null);
+
 	const classes = useStyles();
 	let history = useHistory();
 
-	const	handleChange = (e) => {
+	const handleChange = (e) => {
 		const itemName = e.target.name;
 		const itemValue = e.target.value;
 
 		if (itemName === 'email') {
 			setEmail(itemValue);
 		}
-	}
+	};
 
-	const handleSubmit =  async(e) => {
+	const handleSubmit = async (e) => {
 		var registrationInfo = {
 			email: email,
 		};
 		e.preventDefault();
 		try {
-			await passwordReset(registrationInfo)
+			await passwordReset(registrationInfo);
 			history.push('/signin');
-		} catch(error) {
-				console.log('Firebase Error:', error.code, error);
-				if (error.message !== null) {
-					let errorMessage = messages[error.code] || error.message;
-					setErrorMessage(errorMessage);
-				} else {
-					setErrorMessage(null);
-				}
-		}			
-	}
+		} catch (error) {
+			console.log('Firebase Error:', error.code, error);
+			if (error.message !== null) {
+				setSnackbarMessage({ type: 'error', text: messages[error.code] || error.message });
+				window.setTimeout(() => {
+					setSnackbarMessage(null);
+				}, 2000);
+			} else {
+				setSnackbarMessage(null);
+			}
+		}
+	};
 
 	return (
 		<Container component="main" maxWidth="xs">
@@ -82,7 +84,7 @@ function PasswordReset() {
 					Password reset
 				</Typography>
 				<form className={classes.form} noValidate onSubmit={handleSubmit}>
-					{errorMessage !== null ? <FormError theMessage={errorMessage} /> : null}
+					{SnackbarMessage !== null ? <FormSnackbarMessage type="error" text={SnackbarMessage.text} /> : null}
 					<TextField
 						variant="outlined"
 						margin="normal"
@@ -110,7 +112,7 @@ function PasswordReset() {
 				</form>
 			</div>
 		</Container>
-	);	
+	);
 }
 
 export default PasswordReset;
