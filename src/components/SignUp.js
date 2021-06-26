@@ -1,22 +1,13 @@
 import React, { useState, useContext } from 'react';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {
-	makeStyles,
-	Typography,
-	Container,
-	Grid,
-	TextField,
-	Link,
-	CssBaseline,
-	Button,
-	Avatar,
-} from '@material-ui/core';
+import { makeStyles, Typography, Container, Grid, TextField, CssBaseline, Button, Avatar } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { AuthContext, signUpUser } from '../services/Firebase';
 
-import { FormSnackbarMessage } from './FormAlert';
+import { Notification } from './Notification';
 import messages from './messages';
+import { FormattedMessage } from 'react-intl';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -36,6 +27,13 @@ const useStyles = makeStyles((theme) => ({
 	submit: {
 		margin: theme.spacing(3, 0, 2),
 	},
+	a: {
+		color: theme.palette.primary.main,
+		textDecoration: 'none',
+		'&:hover': {
+			color: theme.palette.secondary.main,
+		},
+	},
 }));
 
 const SignUp = ({ registerUser }) => {
@@ -43,7 +41,7 @@ const SignUp = ({ registerUser }) => {
 	const [displayName, setDisplayName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [snackbarMessage, setSnackbarMessage] = useState(null);
+	const [notify, setNotify] = useState(null);
 
 	const classes = useStyles();
 	let history = useHistory();
@@ -70,10 +68,10 @@ const SignUp = ({ registerUser }) => {
 		e.preventDefault();
 
 		if (!registrationInfo.displayName) {
-			setSnackbarMessage({ type: 'error', text: messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus' });
+			setNotify({ type: 'error', text: messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus' });
 			window.setTimeout(() => {
-				setSnackbarMessage(null);
-			}, 2000);
+				setNotify(null);
+			}, 3000);
 			return;
 		}
 
@@ -82,10 +80,10 @@ const SignUp = ({ registerUser }) => {
 			if (typeof registerUser === 'function') {
 				registerUser(registrationInfo.firstName);
 			}
-			setSnackbarMessage(null);
+			setNotify(null);
 			history.push('/');
 		} catch (error) {
-			setSnackbarMessage({ type: 'error', text: messages[error.code] || error.message });
+			setNotify({ type: 'error', text: messages[error.code] || error.message });
 		}
 	};
 
@@ -100,10 +98,10 @@ const SignUp = ({ registerUser }) => {
 					<LockOutlinedIcon />
 				</Avatar>
 				<Typography component="h1" variant="h5">
-					Registrieren
+					<FormattedMessage id="signup_page_title" />
 				</Typography>
 				<form className={classes.form} noValidate onSubmit={handleSubmit}>
-					{snackbarMessage ? <FormSnackbarMessage type="error" text={snackbarMessage.text} /> : null}
+					{notify ? <Notification type="error" text={notify.text} /> : null}
 					<Grid container spacing={2}>
 						<Grid item xs={12}>
 							<TextField
@@ -113,7 +111,7 @@ const SignUp = ({ registerUser }) => {
 								required
 								fullWidth
 								id="displayName"
-								label="Full Name"
+								label={<FormattedMessage id="signup_page_input_name" />}
 								autoFocus
 								value={displayName}
 								onChange={handleChange}
@@ -125,7 +123,7 @@ const SignUp = ({ registerUser }) => {
 								required
 								fullWidth
 								id="email"
-								label="Email Adresse"
+								label={<FormattedMessage id="signup_page_input_email" />}
 								name="email"
 								autoComplete="email"
 								value={email}
@@ -138,7 +136,7 @@ const SignUp = ({ registerUser }) => {
 								required
 								fullWidth
 								name="password"
-								label="Password"
+								label={<FormattedMessage id="signup_page_input_password" />}
 								type="password"
 								id="password"
 								autoComplete="current-password"
@@ -148,14 +146,20 @@ const SignUp = ({ registerUser }) => {
 						</Grid>
 					</Grid>
 					<Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-						Registrieren
+						<FormattedMessage id="signup_page_title" />
 					</Button>
 					<Grid container justify="flex-end">
 						<Grid item>
-							{'Haben Sie berits ein Login? '}
-							<Link href="./signin" variant="body2">
-								Hier einloggen.
-							</Link>
+							<FormattedMessage
+								id="signup_page_login_bereits"
+								values={{
+									a: (chunks) => (
+										<a href="/signin" className={classes.a}>
+											{chunks}
+										</a>
+									),
+								}}
+							/>
 						</Grid>
 					</Grid>
 				</form>

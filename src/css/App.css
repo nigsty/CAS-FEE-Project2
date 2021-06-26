@@ -12,3 +12,24 @@
 	margin-top: 0;
 	margin-bottom: 0;
 }
+
+.LanguageSwitcher {
+	width: 200px;
+	position: absolute;
+	top: 10px;
+	right: 205px;
+	z-index: 7;
+	font-family: inherit;
+	display: flex;
+	justify-content: flex-end;
+}
+
+select {
+	color: #4a4a4a;
+	border: none;
+}
+
+.calendly-inline-widget {
+	min-width: 520px;
+	height: 630px;
+}

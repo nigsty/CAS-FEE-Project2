@@ -5,13 +5,14 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import { Typography, makeStyles, Container, Grid, Link } from '@material-ui/core';
+import { Typography, makeStyles, Container, Grid } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 import { signInUser } from '../services/Firebase';
-import { FormSnackbarMessage } from './FormAlert';
+import { Notification } from './Notification';
 
 import messages from './messages';
+import { FormattedMessage } from 'react-intl';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -32,13 +33,20 @@ const useStyles = makeStyles((theme) => ({
 		margin: theme.spacing(3, 0, 2),
 		// background: 'linear-gradient(45deg, #F7931E, #009444, #F15A24)'
 	},
+	a: {
+		color: theme.palette.primary.main,
+		textDecoration: 'none',
+		'&:hover': {
+			color: theme.palette.secondary.main,
+		},
+	},
 }));
 
 const SignIn = (props) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	//const [errorMessage, setErrorMessage] = useState(null);
-	const [snackbarMessage, setSnackbarMessage] = useState(null);
+	const [notify, setNotify] = useState(null);
 
 	const classes = useStyles();
 	let history = useHistory();
@@ -62,13 +70,13 @@ const SignIn = (props) => {
 		e.preventDefault();
 		try {
 			await signInUser(registrationInfo);
-			setSnackbarMessage(null);
+			setNotify(null);
 			history.push('/appointments');
 		} catch (error) {
-			setSnackbarMessage({ type: 'error', text: messages[error.code] || error.message });
+			setNotify({ type: 'error', text: messages[error.code] || error.message });
 			window.setTimeout(() => {
-				setSnackbarMessage(null);
-			}, 2000);
+				setNotify(null);
+			}, 3000);
 		}
 	};
 
@@ -80,17 +88,17 @@ const SignIn = (props) => {
 					<LockOutlinedIcon />
 				</Avatar>
 				<Typography component="h1" variant="h5">
-					Login
+					<FormattedMessage id="signin_page_title" />
 				</Typography>
 				<form className={classes.form} noValidate onSubmit={handleSubmit}>
-					{snackbarMessage !== null ? <FormSnackbarMessage type="error" text={snackbarMessage.text} /> : null}
+					{notify !== null ? <Notification type="error" text={notify.text} /> : null}
 					<TextField
 						variant="outlined"
 						margin="normal"
 						required
 						fullWidth
 						id="email"
-						label="Email Address"
+						label={<FormattedMessage id="signin_page_input_email" />}
 						name="email"
 						autoComplete="email"
 						autoFocus
@@ -104,7 +112,7 @@ const SignIn = (props) => {
 						required
 						fullWidth
 						name="password"
-						label="Password"
+						label={<FormattedMessage id="signin_page_input_password" />}
 						type="password"
 						id="password"
 						autoComplete="current-password"
@@ -112,19 +120,32 @@ const SignIn = (props) => {
 						onChange={handleChange}
 					/>
 					<Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-						Anmelden
+						<FormattedMessage id="signin_page_button_anmelden" />
 					</Button>
 					<Grid container>
 						<Grid item xs>
-							<Link href="./password-reset" variant="body2">
-								Passwort vergessen?
-							</Link>
+							<FormattedMessage
+								id="signin_page_Passwort_vergessen"
+								values={{
+									a: (chunks) => (
+										<a href="./password-reset" className={classes.a}>
+											{chunks}
+										</a>
+									),
+								}}
+							/>
 						</Grid>
 						<Grid item>
-							{'Neu bei Habesch? '}
-							<Link href="/signup" variant="body2">
-								{' Jetzt Registrieren.'}
-							</Link>
+							<FormattedMessage
+								id="signin_page_neu_habescha"
+								values={{
+									a: (chunks) => (
+										<a href="/signup" className={classes.a}>
+											{chunks}
+										</a>
+									),
+								}}
+							/>
 						</Grid>
 					</Grid>
 				</form>

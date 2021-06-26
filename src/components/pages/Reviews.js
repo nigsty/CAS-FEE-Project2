@@ -10,10 +10,12 @@ import Button from '@material-ui/core/Button';
 import { Helmet } from 'react-helmet';
 
 import ReviewsList from '../ReviewsList';
-import { FormSnackbarMessage } from '../FormAlert';
+import { Notification } from '../Notification';
 import { auth, getReviews, addReview, AuthContext } from '../../services/Firebase';
 import messages from '../messages';
 import { MainContainer, Title } from '../ui/ui-partials';
+import { FormattedMessage } from 'react-intl';
+import LoadingIndicator from '../ui/LoadingIndicator';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -50,14 +52,17 @@ function Reviews() {
 	const user = useContext(AuthContext);
 	const [review, setReview] = useState('');
 	const [nameAndInstitution, setNameAndInstitution] = useState('');
-	const [SnackbarMessage, setSnackbarMessage] = useState(null); // { type: "success", text: "" }
+	const [notify, setNotify] = useState(null); // { type: "success", text: "" }
 
-	const [reviews, setReviews] = useState(null); // [] array
+	const [reviews, setReviews] = useState(null);
+
+	const [loading, setLoading] = useState(true);
 
 	const readReviews = async () => {
 		try {
 			const reviews = await getReviews();
 			setReviews(reviews);
+			setLoading(false);
 		} catch (error) {
 			console.log('could not get reviews.', error);
 		}
@@ -79,21 +84,21 @@ function Reviews() {
 			uid: auth.currentUser ? auth.currentUser.uid : '',
 		};
 		if (!tempReview.review || !tempReview.nameAndInstitution) {
-			setSnackbarMessage({
+			setNotify({
 				type: 'error',
 				text: messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.',
 			});
-			window.setTimeout(() => setSnackbarMessage(null), 2000);
+			window.setTimeout(() => setNotify(null), 3000);
 			return;
 		} else if (tempReview.review && tempReview.nameAndInstitution) {
-			setSnackbarMessage(null);
-			setSnackbarMessage({
+			setNotify(null);
+			setNotify({
 				type: 'success',
 				text: messages['thank-you-review'] || 'Danke, ich schätze Ihre Meinung!',
 			});
-			window.setTimeout(() => setSnackbarMessage(null), 2000);
+			window.setTimeout(() => setNotify(null), 3000);
 		} else {
-			setSnackbarMessage(null);
+			setNotify(null);
 		}
 
 		let newDocRef;
@@ -123,7 +128,7 @@ function Reviews() {
 		}
 	};
 
-	const reviewHeading = 'Aktuelle Bewertungen';
+	const reviewHeading = <FormattedMessage id="review_page_title" />;
 
 	return (
 		<div className={classes.root}>
@@ -144,13 +149,11 @@ function Reviews() {
 				{user ? (
 					<div className={classes.paper}>
 						<Typography component="h1" variant="h5">
-							Rezesion schreiben
+							<FormattedMessage id="review_page_rezension_schreiben" />
 						</Typography>
 
 						<form className={classes.form} noValidate onSubmit={handleSubmit}>
-							{SnackbarMessage ? (
-								<FormSnackbarMessage type={SnackbarMessage.type} text={SnackbarMessage.text} />
-							) : null}
+							{notify ? <Notification type={notify.type} text={notify.text} /> : null}
 
 							<TextField
 								variant="outlined"
@@ -158,7 +161,7 @@ function Reviews() {
 								required
 								fullWidth
 								id="review"
-								label="Ihre Bewertung..."
+								label={<FormattedMessage id="review_page_input_review" />}
 								name="review"
 								autoComplete="thema"
 								autoFocus
@@ -174,7 +177,7 @@ function Reviews() {
 								required
 								fullWidth
 								id="nameAndInstitution"
-								label="Name & Institution"
+								label={<FormattedMessage id="review_page_input_name" />}
 								name="nameAndInstitution"
 								autoComplete="institution"
 								value={nameAndInstitution}
@@ -187,7 +190,7 @@ function Reviews() {
 								color="primary"
 								className={classes.submit}
 							>
-								Senden
+								<FormattedMessage id="review_page_sent_button" />
 							</Button>
 						</form>
 					</div>
@@ -202,7 +205,7 @@ function Reviews() {
 								<Grid item xs={12}>
 									{reviews && reviews.length ? (
 										<Typography variant="h3" color="primary" gutterBottom>
-											Aktuelle Bewertungen
+											<FormattedMessage id="review_page_title" />
 										</Typography>
 									) : null}
 								</Grid>
@@ -212,9 +215,12 @@ function Reviews() {
 								</Grid>
 							)}
 							<Grid item xs={12}>
-								<Grid container spacing={2}>
-									{reviews ? <ReviewsList reviews={reviews} /> : null}
-								</Grid>
+								{loading && <LoadingIndicator />}
+								{!loading && (
+									<Grid container spacing={2}>
+										{reviews ? <ReviewsList reviews={reviews} /> : null}
+									</Grid>
+								)}
 							</Grid>
 						</Grid>
 					</Grid>

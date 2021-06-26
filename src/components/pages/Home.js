@@ -3,6 +3,7 @@ import { makeStyles, Paper, Grid, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import { Helmet } from 'react-helmet';
 import { AuthContext } from '../../services/Firebase';
+import { FormattedMessage } from 'react-intl';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -53,13 +54,17 @@ function Home(props) {
 					{user ? (
 						<Link underline="none" href="./appointments" variant="body2">
 							<Paper className={classes.paper}>
-								<Typography variant="h2">Termin vereinbaren?</Typography>
+								<Typography variant="h2">
+									<FormattedMessage id="start_page" />
+								</Typography>
 							</Paper>
 						</Link>
 					) : (
 						<Link underline="none" href="./signin" variant="body2">
 							<Paper className={classes.paper}>
-								<Typography variant="h2">Termin vereinbaren?</Typography>
+								<Typography variant="h2">
+									<FormattedMessage id="start_page" />
+								</Typography>
 							</Paper>
 						</Link>
 					)}

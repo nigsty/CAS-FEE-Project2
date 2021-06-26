@@ -13,33 +13,37 @@ const theme = createMuiTheme({
 		},
 		primary: {
 			main: `${habeschaGreen}`,
+			light: 'rgba(5, 147, 72, 0.6)',
 		},
 		secondary: {
 			main: `${habeschaRed}`,
+			light: 'rgba(241, 104, 36, .06)',
 		},
 	},
 	typography: {
 		fontFamily: 'Titillium Web',
 		tab: {
 			textTransform: 'none',
-			fontFamily: 'Titillium Web',
 			fontSize: '1.1rem',
-			fontWeight: 600,
+			fontWeight: 'bold',
 			opacity: 1,
 		},
 		h1: {
 			fontSize: '2.5rem',
-			fontWeight: 500,
+			fontWeight: 'normal',
 		},
 		h2: {
 			fontSize: '2rem',
+			fontWeight: 'normal',
 		},
 		h3: {
 			fontSize: '1.5rem',
+			fontWeight: 'normal',
 		},
 		body1: {
 			fontSize: '1.2rem',
 			color: '#4a4a4a',
+			fontWeight: 'normal',
 			// textAlign: 'justify',
 		},
 		body2: {
@@ -60,7 +64,7 @@ theme.props = {
 theme.overrides = {
 	MuiButton: {
 		root: {
-			color: 'green',
+			color: theme.palette.primary.main,
 			'&:focus': {
 				outline: 'none',
 			},
@@ -87,7 +91,23 @@ theme.overrides = {
 	},
 	MuiInputLabel: {
 		root: {
-			fontSize: '1.5rem',
+			fontSize: '1.1rem',
+		},
+	},
+	MuiFilledInput: {
+		root: {
+			backgroundColor: 'none',
+			'&:hover': {
+				backgroundColor: 'rgba(241, 104, 36, .06)',
+			},
+			'&:focus': {
+				outline: 'none',
+			},
+		},
+	},
+	MuiFormLabel: {
+		root: {
+			color: 'green',
 		},
 	},
 };

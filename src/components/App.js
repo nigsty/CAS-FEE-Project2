@@ -42,7 +42,7 @@ const App = (props) => {
 	const handleLogOut = async (e) => {
 		e.preventDefault();
 		await logOutUser();
-		
+
 		history.push('/');
 	};
 

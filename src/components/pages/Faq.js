@@ -5,6 +5,7 @@ import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import { Helmet } from 'react-helmet';
 import { MainContainer, Title } from '../ui/ui-partials';
+import { FormattedMessage } from 'react-intl';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -55,33 +56,33 @@ const AccordionSummary = withStyles({
 
 const faqContainer = [
 	{
-		heading: 'Was ist Dolmetschen?',
-		body:
-			'Dolmetschen bezeichnet die Übertragung eines nicht fixierten, also in der Regel gesprochenen Texts, mündlich (oder mittels Gebärdensprache) von einer Sprache in eine andere.',
+		heading: <FormattedMessage id="faq_dolmetschen_subtitle" />,
+		body: <FormattedMessage id="faq_dolmetschen_body" />,
 	},
 	{
-		heading: 'Was ist Übersetzen?',
-		body:
-			'Übersetzen ist die Übertragung der Bedeutung eines (meist schriftlich) fixierten Textes in einer Ausgangssprache in eine Zielsprache; anderseits versteht man darunter das Ergebnis dieses Vorgangs.',
+		heading: <FormattedMessage id="faq_uebersetzen_subtitle" />,
+		body: <FormattedMessage id="faq_uebersetzen_body" />,
 	},
 	{
-		heading: 'Welche Techniken im Dolmetschen gibt es?',
+		heading: <FormattedMessage id="faq_dolmetschen_techniken_subtitle" />,
 		body: (
 			<span>
 				<ol className={'ol'}>
-				<li><strong>Konsekutivdolmetschen</strong> wird manchmal auch als Verhandlungsdolmetschen bezeichnet
-				(also Segment für Segment). Der/die Dolmetscher/-in wartet bis der Sprecher seinen Redebeitrag jeweils
-				beendet hat, um dann diesen in die Sprache des Zuhörers zu übersetzen</li><li><strong>Flüsterdolmetschen</strong> ist eine
-				Technik des Dolmetschens, bei der der Dolmetscher in das Ohr des Zuhörers flüstert. </li><li><strong>Simultandolmetschen (Konferenzdolmetschen)</strong> ist eine Technik, bei welcher Redebeiträge „fast in Echtzeit“
-				übertragen werden.</li></ol>
+					<FormattedMessage
+						id="faq_dolmetschen_techniken_body_list"
+						values={{
+							strong: (chunks) => <strong>{chunks}</strong>,
+							li: (chunks) => <li>{chunks}</li>,
+						}}
+					/>
+				</ol>
 			</span>
 		),
 	},
 	{
-		heading: 'Was ist interkulturelles Dolmetschen?',
-		body:
-			'Interkulturelles Dolmetschen bezeichnet die mündliche Übertragung (in der Regel Konsekutivdolmetschen) des Gesprochenen von einer Sprache in eine andere unter Berücksichtigung des sozialen und kulturellen Hintergrunds der Gesprächsteilnehmenden. Es findet in einer Trialogsituation – einem «Dialog zu Dritt» – statt. Dabei kann die/der interkulturell Dolmetschende physisch vor Ort sein oder via Telefon / Video  zugeschaltet werden.',
-	}
+		heading: <FormattedMessage id="faq_interkulturelles_dolmetschen_subtitle" />,
+		body: <FormattedMessage id="faq_interkulturelles_dolmetschen_body" />,
+	},
 ];
 
 const faqHeading = 'Häufig gestellte Fragen';

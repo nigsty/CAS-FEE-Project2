@@ -19,6 +19,9 @@ import logo from '../../assets/habescha-web-interpret-logo.svg';
 import hamburger from '../../assets/hamburger.svg';
 import addAppointment from '../../assets/add-appointment.png';
 import { AuthContext } from '../../services/Firebase';
+import LanguageSwitcher from '../ui/LanguageSwitcher';
+import { FormattedMessage } from 'react-intl';
+import { AppStateContext } from '../../AppStateProvider';
 
 function ElevationScroll(props) {
 	const { children } = props;
@@ -56,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 		paddingLeft: '0',
 	},
 	logoContainer: {
-		marginLeft: '4em',
+		marginLeft: '2em',
 		[theme.breakpoints.down('md')]: {
 			marginLeft: '1em',
 		},
@@ -74,8 +77,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	button: {
 		borderRadius: '50px',
-		marginLeft: '50px',
-		marginRight: '4em',
+		marginLeft: '25px',
+		marginRight: '2em',
 		fontFamily: 'Titillium Web',
 		fontWeight: 500,
 		fontSize: '1rem',
@@ -116,13 +119,15 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	appbar: {
-		zIndex: theme.zIndex.modal + 1,
+		[theme.breakpoints.down('md')]: {
+			zIndex: theme.zIndex.modal + 1,
+		},
 		backgroundColor: 'white',
 		color: theme.palette.common.green,
 		opacity: 1,
 	},
-	testClasse: {
-		backgroundColor: theme.palette.common.red,
+	select: {
+		textTransform: 'none',
 	},
 }));
 
@@ -133,6 +138,7 @@ export default function Header(props) {
 	const location = useLocation();
 	const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const { language } = useContext(AppStateContext);
 
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [value, setValue] = useState(0);
@@ -161,26 +167,31 @@ export default function Header(props) {
 						src={addAppointment}
 						style={{ verticalAlign: 'bottom' }}
 					/>{' '}
-					Termin
+					<FormattedMessage id="nav_termin" />
 				</span>
 			),
 			link: '/',
 			activeIndex: 0,
 		},
-		{ name: 'Telefondolmetschen', link: '/interpreting', activeIndex: 1 },
-		{ name: 'FAQ', link: '/faq', activeIndex: 2 },
-		{ name: 'Über mich', link: '/about', activeIndex: 3 },
-		{ name: 'Kundenbewertungen', link: '/reviews', activeIndex: 4 },
+		{
+			name: <FormattedMessage id="nav_interpreting" />,
+			link: '/interpreting',
+			activeIndex: 1,
+		},
+		{ name: <FormattedMessage id="nav_faq" />, link: '/faq', activeIndex: 2 },
+		{ name: <FormattedMessage id="nav_about" />, link: '/about', activeIndex: 3 },
+		{ name: <FormattedMessage id="nav_review" />, link: '/reviews', activeIndex: 4 },
 	];
 
+	const select = <LanguageSwitcher />;
 	const tabs = (
 		<React.Fragment>
 			<Tabs
+				key={language}
 				value={activeIndex()}
 				onChange={handleChange}
 				className={classes.tabContainer}
 				indicatorColor="primary"
-				classes={{ indicator: classes.testClasse }}
 			>
 				{routes.map((route, index) => (
 					<Tab
@@ -191,6 +202,7 @@ export default function Header(props) {
 						label={route.name}
 					/>
 				))}
+				<Tab label={select} classes={{ root: classes.select }} />
 			</Tabs>
 			{user ? (
 				<Button variant="contained" color="secondary" className={classes.button} onClick={handleLogOut}>
@@ -241,6 +253,7 @@ export default function Header(props) {
 							</ListItemText>
 						</ListItem>
 					))}
+					<ListItem divider>{select}</ListItem>
 				</List>
 			</SwipeableDrawer>
 			<IconButton

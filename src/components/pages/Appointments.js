@@ -15,7 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import { FormSnackbarMessage } from '../FormAlert';
+import { Notification } from '../Notification';
 import AppointmentsList from '../AppointmentsList';
 import messages from '../messages';
 
@@ -23,6 +23,7 @@ import deLocale from 'date-fns/locale/de';
 import DateFnsUtils from '@date-io/date-fns';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Redirect } from 'react-router-dom';
+import LoadingIndicator from '../ui/LoadingIndicator';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -40,15 +41,20 @@ const useStyles = makeStyles((theme) => ({
 	},
 	table: {
 		minWidth: 650,
-	},
-	tableHead: {
-		fontWeight: 700,
+		'& thead th': {
+			fontWeight: 700,
+			backgroundColor: theme.palette.secondary.light,
+		},
+		'& tbody tr:hover': {
+			backgroundColor: theme.palette.secondary.light,
+			cursor: 'pointer',
+		},
 	},
 	dateTimeColumn: {
 		width: '25%',
 	},
 	tablePadding: {
-		padding: '16px',
+		padding: theme.spacing(2),
 	},
 	errorIcon: {
 		color: 'red',
@@ -60,18 +66,17 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 	const [thema, setThema] = useState('');
 	const [institution, setInstitution] = useState('');
 	const [aptDateTime, setAptDateTime] = useState(new Date());
-
-	const [SnackbarMessage, setSnackbarMessage] = useState(null); // { type: "success", text: "" }
+	const [notify, setNotify] = useState(null);
+	const [loading, setLoading] = useState(true);
 
 	const user = useContext(AuthContext);
-
 	const classes = useStyles();
 
 	useEffect(() => {
 		if (user) {
 			(async () => {
 				await readAppointments();
-				//await getReviews();
+				setLoading(false);
 			})();
 		}
 	}, [user, readAppointments]);
@@ -99,6 +104,14 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 		}
 	};
 
+	const headCells = [
+		{ id: 'thema', label: 'Das Thema' },
+		{ id: 'institution', label: 'Institution' },
+		{ id: 'termin', label: 'Datum & Uhrzeit' },
+		{ id: 'bearbeiten', label: 'Bearbeiten' },
+		{ id: 'loeschen', label: 'Löschen' },
+	];
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		let tempApt = {
@@ -110,32 +123,32 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 			uid: auth.currentUser.uid,
 		};
 		if (!tempApt.thema || !tempApt.institution || !tempApt.aptDateTime) {
-			setSnackbarMessage({
+			setNotify({
 				type: 'error',
 				text: messages['empty-fields'] || 'Bitte füllen Sie alle Felder aus.',
 			});
 			window.setTimeout(() => {
-				setSnackbarMessage(null);
+				setNotify(null);
 			}, 2000);
 			return;
 		} else if (tempApt.thema && tempApt.institution && tempApt.aptDateTime) {
-			setSnackbarMessage(null);
+			setNotify(null);
 			if (id) {
-				setSnackbarMessage({
+				setNotify({
 					type: 'success',
 					text: messages['thank-you-appointment-edit'] || 'Danke! edited',
 				});
 			} else {
-				setSnackbarMessage({
+				setNotify({
 					type: 'success',
 					text: messages['thank-you-appointment'] || 'Ihre Änderungen sind gespeichert!',
 				});
 			}
 			window.setTimeout(() => {
-				setSnackbarMessage(null);
+				setNotify(null);
 			}, 2000);
 		} else {
-			setSnackbarMessage(null);
+			setNotify(null);
 		}
 
 		let newDocRef;
@@ -183,9 +196,7 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 						Termin vereinbaren
 					</Typography>
 					<form className={classes.form} noValidate onSubmit={handleSubmit}>
-						{SnackbarMessage ? (
-							<FormSnackbarMessage type={SnackbarMessage.type} text={SnackbarMessage.text} />
-						) : null}
+						{notify ? <Notification type={notify.type} text={notify.text} /> : null}
 
 						<TextField
 							variant="outlined"
@@ -236,7 +247,8 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 				<Grid item xs={12} md={12} lg={8} className={classes.tablePadding}>
 					<Grid container>
 						<Grid item xs={12} className={classes.mobileMargin}>
-							{appointments && appointments.length ? (
+							{loading && <LoadingIndicator />}
+							{!loading && appointments && appointments.length ? (
 								<Typography variant="h2" color="primary" gutterBottom>
 									Ihre Termine
 								</Typography>
@@ -248,21 +260,15 @@ const Appointments = ({ appointments, match, readAppointments, handleDelete, loa
 									{appointments && appointments.length ? (
 										<TableHead>
 											<TableRow>
-												<TableCell classes={{ root: classes.tableHead }} align="left">
-													Das Thema
-												</TableCell>
-												<TableCell classes={{ root: classes.tableHead }} align="left">
-													Institution
-												</TableCell>
-												<TableCell classes={{ root: classes.tableHead }} align="left">
-													Datum & Uhrzeit
-												</TableCell>
-												<TableCell classes={{ root: classes.tableHead }} align="left">
-													Bearbeiten
-												</TableCell>
-												<TableCell classes={{ root: classes.tableHead }} align="left">
-													Löschen
-												</TableCell>
+												{headCells.map((headCell) => (
+													<TableCell
+														classes={{ root: classes.tableHead }}
+														align="left"
+														key={headCell.id}
+													>
+														{headCell.label}
+													</TableCell>
+												))}
 											</TableRow>
 										</TableHead>
 									) : null}

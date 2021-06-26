@@ -3,14 +3,9 @@ import { MainContainer, Title } from '../ui/ui-partials';
 import { Typography, Grid, makeStyles } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import { Helmet } from 'react-helmet';
+import { FormattedMessage } from 'react-intl';
 
-//import me from '../../assets/me.png';
 import me1 from '../../assets/Nigsty-Equbamichael-Abreha-410.jpg';
-//import me2 from '../../assets/Nigsty-Equbamichael-Abreha-410.avif';
-//import me3 from '../../assets/Nigsty-Equbamichael-Abreha-280-high-gut.jpg';
-//import me4 from '../../assets/Nigsty-Equbamichael-Abreha-280-low-31.jpg';
-//import me5 from '../../assets/Nigsty-Equbamichael-Abreha-280-medium-46.jpg';
-//import me6 from '../../assets/Nigsty-Equbamichael-Abreha-280-high.jpg';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -29,19 +24,24 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const aboutMeHeading = 'I am habescha';
+const aboutMeHeading = <FormattedMessage id="about_title" />;
 const aboutMeBody = (
 	<span>
-		Mein Name ist <strong>Nigsty Equbamichael Abreha</strong>. Im Jahre 1998 kam ich aus meinem Heimatland 
-		<strong> Äthiopien</strong>, in dem ich geboren und aufgewachsen bin, in die <strong>Schweiz</strong>. Meine Muttersprachen sind{' '}
-		<strong>Tigrinya und Amharisch</strong>. Ich bin Mutter einer 14-jährigen Tochter, welche Schülerin einer
-		Sekundarschule ist. Ich bin im Bereich Web-Entwicklung als Frontend tätig. Weiterhin erhielt ich das{' '}
-		<strong>Zertifikat Interpret</strong> zum interkulturellen Dolmetschen, was mich dazu befähigte von 2010 bis
-		2019 als <strong>interkulturelle Dolmetscherin vor Ort</strong> bei <strong>KOMIN</strong>, sowie als <strong>Femmes-Tische Moderatorin</strong>,
-		zu arbeiten. Seit März 2019 bin ich nun bei <strong>HEKS</strong> als <strong>interkulturelle Telefondolmetscherin</strong> bei
-		beschleunigten Asylverfahren bezüglich Rechtsschutzes in Bundesasylzentren tätig.
-		<br /><br />
-		<strong>Habescha</strong> ist der Oberbegriff für Menschen aus Äthiopien und Eritrea.
+		<FormattedMessage
+			id="about_body1"
+			values={{
+				strong: (chunks) => <strong>{chunks}</strong>,
+				br: () => <br />,
+			}}
+		/>
+		<br />
+		<br />
+		<FormattedMessage
+			id="about_body2"
+			values={{
+				strong: (chunks) => <strong>{chunks}</strong>,
+			}}
+		/>
 	</span>
 );
 
@@ -50,7 +50,7 @@ function About() {
 	return (
 		<div className={classes.root}>
 			<Helmet>
-				<title>Habescha: Nigsty Abreha </title>
+				<title>Habescha: Nigsty Equbamichael Abreha </title>
 				<link rel="canonical" href="http://habescha.ch/about" />
 				<meta
 					name="description"

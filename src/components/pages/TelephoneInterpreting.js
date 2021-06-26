@@ -1,17 +1,19 @@
 import React from 'react';
-import { makeStyles, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import { makeStyles, Typography, useMediaQuery, useTheme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { Helmet } from 'react-helmet';
 import { MainContainer, Title } from '../ui/ui-partials';
+import { FormattedMessage } from 'react-intl';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		padding: 20,
 	},
 	ol: {
-		paddingLeft: 19,
+		paddingLeft: theme.spacing(2.3),
 		marginTop: 0,
 		marginBottom: 0,
+		marginLeft: 5,
 	},
 	a: {
 		color: theme.palette.common.red,
@@ -23,49 +25,70 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const interpretHeading = 'Telefondolmetschen';
+const interpretHeading = <FormattedMessage id="telefondolmetschen_title" />;
 const InterpretBody = () => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 	return (
 		<span>
-			Telefondolmetschen funktioniert genauso wie Dolmetschen vor Ort, nur ohne die Voraussetzung, dass sich die
-			Teilnehmenden am gleichen Platz befinden müssen. Der Service, welchen Habescha bereitstellt, soll zur
-			Überbrückung für Eritreer und Äthiopier, deren Sprachen Amharisch und Tigrinya ist, dienen.
-			<h2 style={{fontSize: matchesXS ? '1.1rem' : null }} className={classes.h2}>Was sind die Vorteile von Telefondolmetschen?</h2>Durch Telefondolmetschen ergibt
-			sich eine effektivere Kommunikation, da das Übersetzen durch eine trainierte, erfahrene und professionell
-			tätige Dolmetscherin stattfindet. Somit werden Informationsverlust sowie potenzielle Missverständnisse
-			vermieden. Weiterhin ist dies eine effiziente und kostengünstige Alternative zur herkömmlichen Art der
-			Sprachmittlung, da der Übersetzer nicht vor Ort präsent sein muss, um den Service zur Verfügung zu stellen.{' '}
-			<h2 style={{fontSize: matchesXS ? '1.1rem' : null }} className={classes.h2}>Wie funktioniert Telefondolmetschen?</h2>
+			<FormattedMessage id="telefondolmetschen_body" />
+			<h2 style={{ fontSize: matchesXS ? '1.1rem' : null }} className={classes.h2}>
+				<FormattedMessage id="telefondolmetschen_body2_subtitle" />
+			</h2>
+			<FormattedMessage id="telefondolmetschen_body2" />{' '}
+			<h2 style={{ fontSize: matchesXS ? '1.1rem' : null }} className={classes.h2}>
+				<FormattedMessage id="telefondolmetschen_body3_subtitle" />
+			</h2>
 			<ol className={classes.ol}>
 				<li>
-					Zunächst registriert man sich über das{' '}
-					<a href="/signup" className={classes.a}>
-						Anmeldeformular
-					</a>
-					, woraufhin man zur Terminvereinbarung weitergeleitet wird.
+					<FormattedMessage
+						id="telefondolmetschen_body3_list1"
+						values={{
+							a: (chunks) => (
+								<a href="/signup" className={classes.a}>
+									{chunks}
+								</a>
+							),
+						}}
+					/>
 				</li>
-				<li>Am vereinbarten Termin wählen Sie die folgende Telefonnummer: 078 845 69 03.</li>{' '}
 				<li>
-					Voraussetzung ist, dass Sie sich am selben Ort wie Ihr Gesprächspartner, mit dem Sie sich
-					verständigen möchten, befinden. Nun erklären Sie Ihre Ausgangssituation sowie das Gesprächsziel.
-					Daraufhin betätigen Sie an Ihrem Telefon den Lautsprecher, um das Gespräch mit Hilfe des
-					Telefondolmetschers sofort zu starten.
+					<FormattedMessage id="telefondolmetschen_body3_list2" />
+				</li>{' '}
+				<li>
+					<FormattedMessage id="telefondolmetschen_body3_list3" />
 				</li>
-				<li>Die Abrechnung des Dolmetscherdienstes erfolgt per E-mail.</li>
 				<li>
-					Ihre Meinung ist sehr wichtig. Hinterlassen Sie bitte ein Feedback unter dem{' '}
-					<a href="/reviews" className={classes.a}>
-						Formular Rezension schreiben
-					</a>
-					.
+					<FormattedMessage id="telefondolmetschen_body3_list4" />
+				</li>
+				<li>
+					<FormattedMessage
+						id="telefondolmetschen_body3_list5"
+						values={{
+							a: (chunks) => (
+								<a href="/reviews" className={classes.a}>
+									{chunks}
+								</a>
+							),
+						}}
+					/>
 				</li>
 			</ol>
-			<h2 style={{fontSize: matchesXS ? '1.1rem' : null }} className={classes.h2}>Was sind die Kosten für die Dienstleistung des Telefondolmetschens?</h2>			
-			Die genannte Dienstleistung kostet 90 CHF pro Stunde. Ab einem Minimum von 30 Minuten (45 CHF) werden jede
-			15 Minuten angerechnet.
+			<h2 style={{ fontSize: matchesXS ? '1.1rem' : null }} className={classes.h2}>
+				<FormattedMessage id="telefondolmetschen_body4_subtitle" />
+			</h2>
+			<FormattedMessage
+				id="telefondolmetschen_body4"
+				values={{
+					strong: (chunks) => <strong>{chunks}</strong>,
+					a: (chunks) => (
+						<a className={classes.a} href="/reviews">
+							{chunks}
+						</a>
+					),
+				}}
+			/>
 		</span>
 	);
 };

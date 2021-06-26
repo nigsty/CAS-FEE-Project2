@@ -12,7 +12,7 @@ import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router';
 
 import { passwordReset } from '../services/Firebase';
-import { FormSnackbarMessage } from './FormAlert';
+import { Notification } from './Notification';
 
 import messages from './messages';
 
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 function PasswordReset() {
 	const [email, setEmail] = useState('');
-	const [SnackbarMessage, setSnackbarMessage] = useState(null);
+	const [notify, setNotify] = useState(null);
 
 	const classes = useStyles();
 	let history = useHistory();
@@ -63,12 +63,12 @@ function PasswordReset() {
 		} catch (error) {
 			console.log('Firebase Error:', error.code, error);
 			if (error.message !== null) {
-				setSnackbarMessage({ type: 'error', text: messages[error.code] || error.message });
+				setNotify({ type: 'error', text: messages[error.code] || error.message });
 				window.setTimeout(() => {
-					setSnackbarMessage(null);
-				}, 2000);
+					setNotify(null);
+				}, 3000);
 			} else {
-				setSnackbarMessage(null);
+				setNotify(null);
 			}
 		}
 	};
@@ -81,17 +81,17 @@ function PasswordReset() {
 					<LockOutlinedIcon />
 				</Avatar>
 				<Typography component="h1" variant="h5">
-					Password reset
+					Passwort zurücksetzen
 				</Typography>
 				<form className={classes.form} noValidate onSubmit={handleSubmit}>
-					{SnackbarMessage !== null ? <FormSnackbarMessage type="error" text={SnackbarMessage.text} /> : null}
+					{notify !== null ? <Notification type="error" text={notify.text} /> : null}
 					<TextField
 						variant="outlined"
 						margin="normal"
 						required
 						fullWidth
 						id="email"
-						label="Email Adresse"
+						label="E-mail-Adresse"
 						name="email"
 						autoComplete="email"
 						autoFocus
@@ -99,7 +99,7 @@ function PasswordReset() {
 						onChange={handleChange}
 					/>
 					<Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-						Email senden
+						E-mail senden
 					</Button>
 					<Grid container>
 						<Grid item>
