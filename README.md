@@ -29,7 +29,7 @@
 
 ## Lösung
 
-### 1. Eigene Projektidee & Wireframes [(PDF)](Projekidee-und-Mockups-Dokumentation.pdf)
+### 1. Eigene Projektidee & Wireframes [(PDF)](Projekidee-und-Wireframe-Dokumentation.pdf)
 
 ### 2. Projektumsetzung
 
